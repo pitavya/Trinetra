@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="io.github.isubham.myapplication.home_admin">
+
+    <!--profile info-->
+    <!--name-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin name"
+            android:textSize="20sp" />
+
+        <!--email-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin email"
+            android:textSize="16sp" />
+
+        <!--account type-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="account type"
+            android:textSize="16sp" />
+
+
+        <TextView
+
+            android:paddingTop="10dp"
+
+            android:paddingBottom="10dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="to_add_new_project"
+            android:text="+ New Project"
+            android:textColor="#0000ff"
+            />
+
+    </LinearLayout>
+
+    <!--list of project-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ha_project_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+</LinearLayout>

@@ -1,7 +1,7 @@
 
 # Trinetra
 
-# Operations
+## Operations
 
 ```JSON
 
@@ -82,7 +82,7 @@
 
       - worker
         
-        [worker_id, adhar_id, name, job designation, skill_type]
+        [worker_id, Aadhar_id, name, job designation, skill_type]
 
         - skill type
 
@@ -98,10 +98,10 @@
         
 
       - shift
-        [shift_id, shift_datatime, project_id]
+        [shift_id, shift_datetime, project_id]
 
 
-      - attendence        
+      - attendance
 
         [shift_id, emp_id_space_sorted]
         
@@ -120,15 +120,68 @@
     
     project = sum(shift) + sum(stages)
     
-    shift = attendence(worker, user.contractor) 
-            + authentication(attendence(worker), user.contractor)
+    shift = attendance(worker, user.contractor)
+            + authentication(attendance(worker), user.contractor)
 
     - Authentication
 	[shift_id, gen_worker_id, status]
 
   - report
     
-    - attendence(shift)
+    - attendance(shift)
     - authentication(shift)
+
+
+## References
+
+   - [Volley Tutorial](https://code.tutsplus.com/tutorials/an-introduction-to-volley--cms-23800)
+
+
+
+## TODO
+
+   - [x] create_account
+   - [x] sign_in
+   - [ ] read_user_detail
+   - [ ] update_user_detail
+
+   - [x] create_project
+   - [x] read_projects
+   - [ ] update_project
+   - [ ] delete_project
+
+   - [ ] add_user_project
+   - [ ] remove_user_project
+
+   - [ ] add_worker
+   - [ ] remove_worker
+   - [ ] update_worker
+   - [ ] delete_worker
+
+   - [ ] add_user_worker
+   - [ ] remove_user_worker
+
+
+   - [ ] create_shift
+   - [ ] read_shift
+
+   - [ ] create_attendence
+   - [ ] read_attendence
+
+   - [ ] integrate random function with Aadhar API
+   - [ ] create_authentication
+   - [ ] read_authentication
+
+
+
+
+
+
+
+
+
+
+
+
 
 
