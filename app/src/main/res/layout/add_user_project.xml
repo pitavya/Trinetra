@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+
+    tools:context="io.github.isubham.myapplication.add_user_project">
+
+    <!--TODO : Show prject name fetched-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Project Name"
+        android:textSize="24dp"
+        />
+
+    <!--Email address -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/a_u_p_email"
+        android:hint="email of user"
+        />
+
+
+    <!--TODO : upon entering email show user detail to confirm-->
+
+
+    <!--Button to Add-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="add_user"
+        android:text="Add User"
+        android:layout_marginTop="16dp"
+        android:textSize="18dp"
+        android:textColor="#0000ff"
+        />
+
+
+
+    <!--Button to Cancel-->
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textSize="18dp"
+        android:textColor="#0000ff"
+        android:onClick="go_back"
+        />
+
+
+</LinearLayout>

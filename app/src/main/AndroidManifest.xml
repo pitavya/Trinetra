@@ -22,7 +22,11 @@
         </activity>
         <activity android:name=".home_admin" />
         <activity android:name=".admin_create_project" />
-        <activity android:name=".admin_project"></activity>
+        <activity android:name=".admin_project" />
+        <activity android:name=".supervisor_add_worker" />
+        <activity android:name=".project_users" />
+        <activity android:name=".project_worker" />
+        <activity android:name=".add_user_project"></activity>
     </application>
 
 </manifest>

@@ -21,9 +21,12 @@ public class home extends AppCompatActivity {
         startActivity(new Intent(home.this, sign_in.class));
 
     }
+
+
+
     public void open_contractor_panel(View V){
 
-        // startActivity(new Intent(home.this, home_contractor.class));
+        // TODO : startActivity(new Intent(home.this, home_contractor.class));
         Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show();
     }
 
@@ -39,6 +42,19 @@ public class home extends AppCompatActivity {
 
     }
 
+
+    public void open_admin_project(View V) {
+
+        startActivity(new Intent(home.this, admin_project.class));
+
+    }
+
+
+    public void open_add_worker_supervisor(View V) {
+
+        startActivity(new Intent(home.this, supervisor_add_worker.class));
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.github.isubham.myapplication.home"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.isubham.myapplication.home">
+    >
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Account module"
+        android:textSize="24dp"
+        />
     <Button
         android:text="Sign In"
         android:onClick="open_sign_in"
@@ -19,15 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User module"
+        android:textSize="24dp"
+        />
+
     <Button
         android:text="Open Admin"
         android:onClick="open_admin_panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:text="Open Contracter"
-        android:onClick="open_contractor_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -38,6 +50,33 @@
         android:layout_height="wrap_content" />
 
 
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Project module"
+        android:textSize="24dp"
+        />
 
+
+    <Button
+        android:text="Open Admin Project"
+        android:onClick="open_admin_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Worker module"
+        android:textSize="24dp"
+        />
+
+
+    <Button
+        android:text="Add Worker by Supervisor"
+        android:onClick="open_add_worker_supervisor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
+</ScrollView>

@@ -231,7 +231,6 @@ public class create_account extends AppCompatActivity {
                             Log.e("ERROR 214 json", e.getMessage());
                         }
 
-
                     }
                 },
 

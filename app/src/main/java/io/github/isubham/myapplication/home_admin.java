@@ -55,7 +55,7 @@ public class home_admin extends AppCompatActivity {
         fill_data();
     }
 
-    String user_id = "31";
+    String user_id = data_wrapper.TEMP_ADMIN_ID;
 
     public void to_add_new_project(View V){
 
@@ -69,7 +69,6 @@ public class home_admin extends AppCompatActivity {
     project_adapter project_adapter;
     LinearLayoutManager linearLayoutManager;
     private List<project> projects;
-
 
     private void init() {
         project_rv = (RecyclerView) findViewById(R.id.ha_project_list);
@@ -109,6 +108,9 @@ public class home_admin extends AppCompatActivity {
                 return get_project_list_param;
 
     }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,45 +187,6 @@ public class home_admin extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
 
-
-
-
-
-
-        /* add some data in projects
-        projects.add(new project("1", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("2", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("3", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("4", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("5", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("6", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("7", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("8", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-
-        projects.add(new project("7", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-        projects.add(new project("8", "Coal",
-                "12 june 2017", "13 june 2018"));
-
-
-        */
     }
 
 
