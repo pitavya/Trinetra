@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,7 @@ public class admin_project extends AppCompatActivity {
 
 
     private void init() {
-        shift_rv = (RecyclerView) findViewById(R.id.a_p_shift_recycleview);
+        shift_rv = findViewById(R.id.a_p_shift_recycleview);
         linearLayoutManager = (new LinearLayoutManager(this));
         shifts = new ArrayList<>();
 
@@ -66,25 +68,15 @@ public class admin_project extends AppCompatActivity {
 
 
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
         shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
 
 
@@ -96,8 +88,11 @@ public class admin_project extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Toast.makeText(admin_project.this,
-                                        ((TextView)view.findViewById(R.id.rl_s_shift_id)).getText(), Toast.LENGTH_SHORT).show();
+                                TextView attendence = (TextView)view.findViewById(R.id.rl_s_detail_attendence_data);
+
+                                //check if it already has checked
+                                    Log.i("view ID", " " + view.getId());
+
                             }
                         }));
 
@@ -143,9 +138,6 @@ public class admin_project extends AppCompatActivity {
                             e.printStackTrace();
                         }
     }
-
-
-
 
     private void fill_data(){
 

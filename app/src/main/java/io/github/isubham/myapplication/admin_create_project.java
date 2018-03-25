@@ -1,9 +1,14 @@
 package io.github.isubham.myapplication;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,10 +34,10 @@ public class admin_create_project extends AppCompatActivity {
     // TODO : replace with actual email id
     // temporary admin user_id
     String user_id = "31";
-
+    static int ui_flag = 0;
 
     // ui components
-    EditText project_name, project_start_date, project_end_date;
+    static EditText project_name, project_start_date, project_end_date;
 
 
     @Override
@@ -67,7 +73,48 @@ public class admin_create_project extends AppCompatActivity {
     }
 
 
+    public void select_project_start_date(View V){
+        ui_flag = 1;
+        DialogFragment dialogFragment = new DatePickerFragment();
+        dialogFragment.show(getFragmentManager(),getString(R.string.datepicker));
 
+    }
+    public void select_project_end_date(View V){
+        ui_flag = 2;
+        DialogFragment dialogFragment = new DatePickerFragment();
+        dialogFragment.show(getFragmentManager(),getString(R.string.datepicker));
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+implements DatePickerDialog.OnDateSetListener
+{
+    public String dateTime;
+
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Use the current date as the default date in the picker
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        // Create a new instance of DatePickerDialog and return it
+        return new DatePickerDialog(getActivity(), this, year, month, day);
+    }
+
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        String date = day + "/" + month + "/" + year;
+        // Do something with the date chosen by the user
+        if (ui_flag == 1){
+            project_start_date.setText(date);
+        }
+        else if(ui_flag == 2){
+            project_end_date.setText(date);
+        }
+    }
+
+}
     public void create_new_project(View V) {
         // TODO : create new project
 

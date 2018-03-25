@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context="io.github.isubham.myapplication.sign_in">
 
     <!--email-->
@@ -45,7 +46,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="signin"
+        android:text="Sign In"
+        android:onClick="sign_in"
 
         />
 

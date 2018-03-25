@@ -13,24 +13,25 @@
 
 		admin : {
 			create_project(),
-			add_user(),
-			view_attendence(),
+			create_package(),
+			add_user(), // admin and contracter
 			view_report()
+		},
+
+		contracter : {
+			read_project(),
+			read_package(),
+			add_worker(),
+			add_supervisor(),
+			add_worker_to_package(),
+			view_report(),
 		},
 
 		supervisor : {
-			add_user(),
-			view_attendence(),
-			view_report()
-		},
-
-		contractor : {
-			add_worker(),
-
-			create_attendence(),
-			create_report(),
-			
+			read_project(),
+			read_package(),
 			create_shift(),			
+			create_report(),
 		},
 	},
 	

@@ -36,9 +36,10 @@ import java.util.Map;
 import io.github.isubham.myapplication.utility.s;
 import io.github.isubham.myapplication.utility.data_wrapper;
 import io.github.isubham.myapplication.utility.network;
+import io.github.isubham.myapplication.utility.volley_wrapper;
 
 
-public class create_account extends AppCompatActivity {
+public class create_account extends volley_wrapper {
 
     // variables
     EditText email, password, aadhar_id, name;
@@ -54,19 +55,36 @@ public class create_account extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.create_account);
+        init();
+    }
+
+
     public void get_account_type(View V) {
         switch (V.getId()) {
             case R.id.account_type_admin:
-                account_type = data_wrapper.AC_ADMIN;
+                account_type = data_wrapper.AC_ADMIN;break;
             case R.id.account_type_contractor:
-                account_type = data_wrapper.AC_CONTRACTOR;
+                account_type = data_wrapper.AC_CONTRACTOR;break;
             case R.id.account_type_supervisor:
-                account_type = data_wrapper.AC_SUPERVISOR;
+                account_type = data_wrapper.AC_SUPERVISOR;break;
+            default:account_type = data_wrapper.AC_ADMIN;
         }
 
     }
 
-    public Map<String, String> build_user_data() {
+
+
+    public void create_account(View V) {
+        make_request();
+    }
+
+
+    @Override
+    public Map makeParams() {
 
         Map<String, String> user_data = new HashMap<String, String>();
 
@@ -77,194 +95,46 @@ public class create_account extends AppCompatActivity {
         user_data.put("name",           s.text(name));
 
         // flags for query
-        user_data.put("module", data_wrapper.QMODULE_USER);
-        user_data.put("query_type",   data_wrapper.QTYPE_I);
-        user_data.put("query",    data_wrapper.Q_CREATE_ACCOUNT);
+        user_data.put("module",         data_wrapper.QMODULE_USER);
+        user_data.put("query_type",     data_wrapper.QTYPE_I);
+        user_data.put("query",          data_wrapper.Q_CREATE_ACCOUNT);
 
         return user_data;
 
     }
 
-    public void create_account(View V) {
+    @Override
+    public void handle_response(JSONObject jsonObject) {
+        try {
 
-        /*
-        HashMap<String, String> data = build_user_data();
+            String id = jsonObject.get("status").toString();
 
-        for (String i: data.keySet()) {
-            Toast.makeText(this, i + " v : " + data.get(i), Toast.LENGTH_SHORT).show();
-        }
-        */
-
-
-        TextView log = (TextView)findViewById(R.id.ca_log);
-        log.setText(build_user_data().toString());
-
-
-        /*
-
-        ////////////////////////////////////////////////////////////////
-        // fetch a String
-        ////////////////////////////////////////////////////////////////
-
-        String url = "http://ip.jsontest.com";
-        StringRequest stringRequest  = new StringRequest(
-                Request.Method.GET,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        // handle result
-                        Toast.makeText(create_account.this, "Hello" + response,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(create_account.this, "Error Occured",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-
-        Volley.newRequestQueue(this).add(stringRequest);
-
-        */
-
-        ////////////////////////////////////////////////////////////////
-        // fetch json
-        ////////////////////////////////////////////////////////////////
-
-        /*
-
-        String url = "http://httpbin.org/get?site=code&network=tutsplus";
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String res = response.toString();
-                        Toast.makeText(create_account.this, res,
-                                Toast.LENGTH_SHORT).show();
-
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
-        );
-
-        Volley.newRequestQueue(this).add(jsonObjectRequest);
-
-        */
-
-        ////////////////////////////////////////////////////////////////
-        // fetch a image
-        ////////////////////////////////////////////////////////////////
-
-        /*
-
-        final ImageView my_image = (ImageView) findViewById(R.id.my_image);
-
-        String url = // "https://avatars0.githubusercontent.com/u/15142714?s=460&v=4";
-                "http://www.clker.com/cliparts/3/m/v/Y/E/V/small-red-apple-md.png";
-
-        ImageRequest imageRequest = new ImageRequest(
-                url,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        my_image.setImageBitmap(response);
-                    }
-                },
-
-                0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ARGB_8888,
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(create_account.this, "Error",
-                                Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-        );
-
-        Volley.newRequestQueue(this).add(imageRequest);
-
-        */
-
-        // making a GET/POST request with data
-
-        String url = data_wrapper.BASE_URL_TEST;
-
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        JSONObject res ;
-                        try{
-                            res = new JSONObject(response);
-                            String id = res.get("status").toString();
-
-                            if (! id.equals("0")) {
-                                /* TODO : go to sign in */
-                                Toast.makeText(create_account.this, "Account create id : " + id , Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(create_account.this, "Error ", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e)
-                        {
-                            Log.e("ERROR 214 json", e.getMessage());
-                        }
-
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(create_account.this, "Error in POST", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-        ){
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                return build_user_data();
-
+            if (!id.equals("0")) {
+                /* TODO : go to sign in */
+                Toast.makeText(create_account.this, "Account create id : " + id, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(create_account.this, "Email or Aadhar already exists", Toast.LENGTH_SHORT).show();
             }
-        };
+        }catch (JSONException e){
+            handle_jsonexception_error(e);
+        }
+    }
+
+    @Override
+    public void make_volley_request(StringRequest stringRequest) {
 
         Volley.newRequestQueue(this).add(stringRequest);
-
-
 
     }
 
+    @Override
+    public void handle_error_response(VolleyError error) {
 
-
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_account);
-        init();
+    public void handle_jsonexception_error(JSONException e) {
+
     }
 
 

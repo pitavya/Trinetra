@@ -7,7 +7,11 @@ package io.github.isubham.myapplication.utility;
 
 public class data_wrapper {
 
-    public static String TEMP_ADMIN_ID = "31";
+
+    //////////////////////////////
+    // resources
+    //////////////////////////
+    public static String TEMP_ADMIN_ID = "10";
     public static String TEMP_SUPERVISOR_ID = "31";
     public static String TEMP_CONTRACTER_ID = "31";
 
@@ -28,10 +32,13 @@ public class data_wrapper {
 
     // query String
 
-    public static String BASE_URL_TEST = "http://192.168.43.122/subham/trinetra/design.php";
+    public static String BASE_URL_LOCAL = "http://192.168.43.122/subham/trinetra/design.php";
 
     /* TODO : add base url */
-    public static String BASE_URL_LIVE = "http://192.168.43.122/subham/trinetra/design.php";
+    public static String BASE_URL_TEST = "https://trinetra.000webhostapp.com/test/design.php";
+
+    // TODO add your deploying server
+    public static String BASE_URL_DEPLOY = "https://trinetra.000webhostapp.com/test/design.php";
 
     public static String QTYPE_I = "i";
     public static String QTYPE_O = "o";

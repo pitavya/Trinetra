@@ -1,7 +1,6 @@
 package io.github.isubham.myapplication;
 
-import android.app.DownloadManager;
-import android.support.v7.app.AppCompatActivity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,53 +8,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 
 import io.github.isubham.myapplication.utility.*;
 
 
-public class sign_in extends AppCompatActivity {
+public class sign_in extends volley_wrapper
+{
 
     // ui
     EditText email, password;
+    TextView si_status;
 
     public void init() {
-        email = (EditText) findViewById(R.id.si_email);
-        password = (EditText) findViewById(R.id.si_password);
-    }
-
-
-    public Map<String, String> build_user_data() {
-
-        Map<String, String> user_data = new HashMap<String, String>();
-
-        user_data.put("email", s.text(email));
-        user_data.put("password", s.salty(s.text(password)));
-
-        // flags for query
-        user_data.put("module", data_wrapper.QMODULE_USER);
-        user_data.put("query_type", data_wrapper.QTYPE_O);
-        user_data.put("query", data_wrapper.Q_SIGN_IN);
-
-        return user_data;
-
+        email =  findViewById(R.id.si_email);
+        password =  findViewById(R.id.si_password);
+        si_status =  findViewById(R.id.si_status);
     }
 
 
@@ -67,57 +45,91 @@ public class sign_in extends AppCompatActivity {
         init();
     }
 
-    public void signin(View V) {
-        String url = data_wrapper.BASE_URL_TEST;
+    public void sign_in(View V) {
 
-        ((TextView)findViewById(R.id.si_status)).setText(build_user_data().toString());
-
-    StringRequest stringRequest = new StringRequest(
-            Request.Method.POST,
-            url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-
-                    JSONObject res;
-                    try {
-                        res = new JSONObject(response);
-
-                        if (res.length() > 0) {
-                                /* TODO : go to sign in */
-                            ((TextView)findViewById(R.id.si_status)).setText("Signed in : " + res.toString());
-                        } else {
-                                /* TODO : go to sign in */
-                            ((TextView)findViewById(R.id.si_status)).setText("Error Signed in : ");
-                        }
-                    } catch (JSONException e) {
-                        Log.e("ERROR 214 json", e.getMessage());
-                    }
-
-
-                }
-            },
-
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(sign_in.this, "Error in POST", Toast.LENGTH_SHORT).show();
-                    error.printStackTrace();
-                }
-            }
-    ) {
-
-        @Override
-        protected Map<String, String> getParams() {
-
-            return build_user_data();
-
-        }
-    };
-
-    Volley.newRequestQueue(this).add(stringRequest);
+        Log.i("sign_in", makeParams().toString());
+        make_request();
 
     }
 
+    @Override
+    public Map makeParams() {
+
+
+        Map<String, String> user_data = new HashMap<String, String>();
+
+        user_data.put("email", s.text(email));
+        user_data.put("password", s.salty(s.text(password)));
+
+        // flags for query
+        user_data.put("module", data_wrapper.QMODULE_USER);
+        user_data.put("query_type", data_wrapper.QTYPE_O);
+        user_data.put("query", data_wrapper.Q_SIGN_IN);
+
+        Log.i("makeparams in sign_in", user_data.toString());
+
+        return user_data;
+
+    }
+
+    @Override
+    public void handle_response(JSONObject jsonObject) {
+
+        Log.i("handle_response sign_in", jsonObject.toString());
+
+        // if auth not found
+        try {
+            if (jsonObject.has("status")) {
+                // give wrong credential info
+                si_status.setText("Email or password don't match");
+            }
+
+            // else goto user_panel depending on the user_type
+
+            else {
+                String user_type =
+                (jsonObject.getJSONObject(email.getText().toString())).getString("user_type");
+                if (user_type == data_wrapper.AC_ADMIN)
+                        Toast.makeText(this, "goto admin", Toast.LENGTH_SHORT).show();
+                        // TODO : goto admin
+
+                else if(user_type == data_wrapper.AC_CONTRACTOR)
+                        Toast.makeText(this, "goto contracter", Toast.LENGTH_SHORT).show();
+                        // TODO : goto contracter
+
+                else{
+                    Toast.makeText(this, "goto supervisor", Toast.LENGTH_SHORT).show();
+                    // TODO : goto supervisor
+                }
+                }
+
+       }catch (JSONException e){
+            Log.e("handle_response sign_in", e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void make_volley_request(StringRequest stringRequest) {
+
+        Volley.newRequestQueue(this).add(stringRequest);
+
+        Log.i("volley_request sign_in", stringRequest.toString());
+
+    }
+
+    @Override
+    public void handle_error_response(VolleyError error) {
+
+        Log.i("handle_error_response", error.toString());
+
+    }
+
+    @Override
+    public void handle_jsonexception_error(JSONException e) {
+
+        Log.i("handle_jsonexception", e.toString());
+
+    }
 }
 
