@@ -4,18 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -26,48 +20,49 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
-import io.github.isubham.myapplication.utility.s;
 import io.github.isubham.myapplication.utility.data_wrapper;
+import io.github.isubham.myapplication.utility.s;
 import io.github.isubham.myapplication.utility.volley_wrapper;
 
-public class admin_create_project extends volley_wrapper {
+
+public class admin_create_package extends volley_wrapper {
 
     // TODO : replace with actual email id
     // temporary admin user_id
     String user_id = "14";
+    String project_id = "5";
+
     static int ui_flag = 0;
 
     // ui components
-    static EditText project_name, project_start_date, project_end_date,
-    project_location ;
+    static EditText package_name, package_start_date, package_end_date,
+    package_location ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_create_project);
+        setContentView(R.layout.admin_create_package);
         init();
     }
 
     private void init() {
-        project_name = (EditText) findViewById(R.id.a_c_p_project_name);
-        project_start_date = (EditText) findViewById(R.id.a_c_p_project_start_date);
-        project_end_date = (EditText) findViewById(R.id.a_c_p_project_end_date);
-
-        project_location = (EditText) findViewById(R.id.a_c_p_project_location);
+        package_name = (EditText) findViewById(R.id.a_c_p_package_name);
+        package_start_date = (EditText) findViewById(R.id.a_c_p_package_start_date);
+        package_end_date = (EditText) findViewById(R.id.a_c_p_package_end_date);
+        package_location = (EditText) findViewById(R.id.a_c_p_package_location);
 
     }
 
 
-
-    public void select_project_start_date(View V){
+    public void select_package_start_date(View V){
         ui_flag = 1;
         DialogFragment dialogFragment = new DatePickerFragment();
         dialogFragment.show(getFragmentManager(),getString(R.string.datepicker));
 
     }
-    public void select_project_end_date(View V){
+
+    public void select_package_end_date(View V){
         ui_flag = 2;
         DialogFragment dialogFragment = new DatePickerFragment();
         dialogFragment.show(getFragmentManager(),getString(R.string.datepicker));
@@ -77,16 +72,18 @@ public class admin_create_project extends volley_wrapper {
     public Map makeParams() {
         Map<String, String> project_data = new HashMap<>();
 
-        project_data.put("project_name",          s.text(project_name));
-        project_data.put("project_start_date",    s.text(project_start_date));
-        project_data.put("project_end_date",      s.text(project_end_date));
-        project_data.put("user_id",               user_id);
-        project_data.put("project_location",               user_id);
-        project_data.put("module",         data_wrapper.QMODULE_PROJECT);
-        project_data.put("query_type",     data_wrapper.QTYPE_I);
-        project_data.put("query",          data_wrapper.Q_CREATE_PROJECT);
+        project_data.put("package_name",          s.text(package_name));
+        project_data.put("package_start_date",    s.text(package_start_date));
+        project_data.put("package_end_date",      s.text(package_end_date));
+        project_data.put("package_location",      s.text(package_location));
+        project_data.put("package_creater_id",               user_id);
+        project_data.put("project_id",               project_id);
 
-        Log.i("map_create_project", project_data.toString());
+        project_data.put("module",         data_wrapper.QMODULE_PACKAGE);
+        project_data.put("query_type",     data_wrapper.QTYPE_I);
+        project_data.put("query",          data_wrapper.Q_CREATE_PACKAGE);
+
+        Log.i("map_create_package", project_data.toString());
 
         return project_data;
 
@@ -104,13 +101,13 @@ public class admin_create_project extends volley_wrapper {
 
             // if project not created
             if (user_details.getString("status") == "-1") {
-                Log.i("TODO ", "project not created");
+                Log.i("TODO ", "package not created");
             }
             else {
-                Log.i("TODO ", "project created");
+                Log.i("TODO ", "package created");
                 startActivity(new Intent(
-                        admin_create_project.this,
-                        admin_home.class));
+                        admin_create_package.this,
+                        admin_project.class));
             }
 
         }
@@ -126,7 +123,7 @@ public class admin_create_project extends volley_wrapper {
     }
 
     public static class DatePickerFragment extends DialogFragment
-implements DatePickerDialog.OnDateSetListener
+                                            implements DatePickerDialog.OnDateSetListener
 {
     public String dateTime;
 
@@ -147,15 +144,15 @@ implements DatePickerDialog.OnDateSetListener
         String date = day + "/" + month + "/" + year;
         // Do something with the date chosen by the user
         if (ui_flag == 1){
-            project_start_date.setText(date);
+            package_start_date.setText(date);
         }
         else if(ui_flag == 2){
-            project_end_date.setText(date);
+            package_end_date.setText(date);
         }
     }
 
 }
-    public void create_new_project(View V) {
+    public void create_new_package(View V) {
         // TODO : create new project
         make_request();
     }

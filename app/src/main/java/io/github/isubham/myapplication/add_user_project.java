@@ -43,8 +43,10 @@ public class add_user_project extends volley_wrapper {
 
 
     @Override
-    public void handle_response(JSONObject response){
+    public void handle_response(String response){
 
+
+        /*
 
         // flag 1, 0 for added user or not
 
@@ -65,6 +67,7 @@ public class add_user_project extends volley_wrapper {
             Log.e("ERROR 214 json", e.getMessage());
         }
 
+*/
     }
 
 

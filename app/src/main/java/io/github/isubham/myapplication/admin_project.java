@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,12 +27,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.github.isubham.myapplication.adapters.package_adapter;
 import io.github.isubham.myapplication.adapters.shift_adapter;
+import io.github.isubham.myapplication.model.package_;
 import io.github.isubham.myapplication.model.shift;
 import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
+import io.github.isubham.myapplication.utility.s;
+import io.github.isubham.myapplication.utility.volley_wrapper;
 
-public class admin_project extends AppCompatActivity {
+public class admin_project extends volley_wrapper {
 /*
 *
 * @info
@@ -44,54 +49,139 @@ public class admin_project extends AppCompatActivity {
 *   - auth
 *
 * */
-    RecyclerView shift_rv;
-    shift_adapter shift_adapter;
+
+
+    @Override
+    public Map makeParams() {
+
+        Map <String, String> shift_map  = new HashMap<>();
+
+        // TODO add from bundle
+        try{
+
+            shift_map.put("project_id", bundle_data_json.getString("project_id"));
+        }catch (JSONException e){
+            Log.e("json ex", "json excpetion in make params of admin project");
+        }
+
+        shift_map.put("module", data_wrapper.QMODULE_PACKAGE);
+        shift_map.put("query_type", data_wrapper.QTYPE_O);
+        shift_map.put("query", data_wrapper.Q_READ_PACKAGES);
+
+        return shift_map;
+
+    }
+
+
+
+    public void admin_create_package(View V){
+        startActivity(new Intent(admin_project.this, admin_create_package.class));
+    }
+
+
+    public void admin_add_admin_project(View V){
+        startActivity(new Intent(admin_project.this, admin_add_admin_project.class));
+    }
+
+    @Override
+    public void handle_response(String response) {
+
+
+        Log.i("admin_project response", response);
+
+
+        //
+        try{
+
+            JSONObject packages_details = new JSONObject(response);
+
+            JSONArray package_ids = packages_details.names();
+
+        for(int i = 0; i < package_ids.length(); i++) {
+
+            String package_id = (String) package_ids.get(i);
+
+            JSONObject packages_detail = packages_details.getJSONObject(
+                        (String)package_id);
+
+            package_ package_ob = new package_();
+
+            package_ob.package_id = package_id;
+            package_ob.package_start_date = packages_detail.getString("package_start_date");
+            package_ob.package_end_date = packages_detail.getString("package_end_date");
+            package_ob.package_name = packages_detail.getString("package_name");
+
+            packages.add(package_ob);
+            package_adapter.notifyDataSetChanged();
+
+        }
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        //
+    }
+
+    @Override
+    public void make_volley_request(StringRequest stringRequest) {
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    RecyclerView package_rv;
+    package_adapter package_adapter;
     LinearLayoutManager linearLayoutManager;
-    private List<shift> shifts;
+    private List<package_> packages;
 
     // TODO : take it from intent
-    String project_id;
+    // String project_id = "5";
 
 
     private void init() {
-        shift_rv = findViewById(R.id.a_p_shift_recycleview);
+        package_rv = findViewById(R.id.a_p_package_recycleview);
         linearLayoutManager = (new LinearLayoutManager(this));
-        shifts = new ArrayList<>();
+        packages = new ArrayList<>();
 
-        shift_adapter = new shift_adapter(shifts);
-        shift_rv.setAdapter(shift_adapter);
-        shift_rv.setLayoutManager(linearLayoutManager);
-
-
-        // TODO : add real data
-        // fill_data();
+        package_adapter = new package_adapter(packages);
+        package_rv.setAdapter(package_adapter);
+        package_rv.setLayoutManager(linearLayoutManager);
 
 
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-        shifts.add(new shift("1", "done some changes", "12 march 2013", "11", "lala"));
-
-
+        fill_data();
 
 
         // TODO : add touch listener
-        shift_rv.addOnItemTouchListener(
+        package_rv.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(),
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                TextView attendence = (TextView)view.findViewById(R.id.rl_s_detail_attendence_data);
 
-                                //check if it already has checked
-                                    Log.i("view ID", " " + view.getId());
+
+                                    // go to admin package panel
+                                // get variables
+                                Intent to_admin_package = new Intent(admin_project.this,
+                                        admin_package.class);
+                                // get package id, name, start_date, end_date
+                                String package_id = ((TextView)view.findViewById(R.id.rl_package_id))
+                                        .getText().toString().trim();
+
+                                 String package_name = ((TextView)view.findViewById(R.id.rl_package_name))
+                                        .getText().toString().trim();
+
+                                 String package_start_date = ((TextView)view.findViewById(R.id.rl_package_start_date))
+                                        .getText().toString().trim();
+
+                                 String package_end_date = ((TextView)view.findViewById(R.id.rl_package_end_date))
+                                        .getText().toString().trim();
+
+
+                                to_admin_package.putExtra("bundle_data",
+                                        bundle_data_string + ","+
+                                        "package_id:"+package_id+","+
+                                        "package_name:"+package_start_date+","+
+                                        "package_start_date:"+package_start_date+","+
+                                        "package_end_date:"+package_end_date
+                                );
+
 
                             }
                         }));
@@ -106,91 +196,62 @@ public class admin_project extends AppCompatActivity {
         fill_data();
     }
 
+    Bundle bundle_data;
+    String bundle_data_string;
+    JSONObject bundle_data_json;
+    TextView project_name, project_start_date, project_end_date, project_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_project);
+
+        // handle state
+        bundle_data = getIntent().getExtras();
+        bundle_data_json = new JSONObject();
+
+
+        if(bundle_data != null) {
+
+             Toast.makeText(this, " user details parsed", Toast.LENGTH_SHORT).show();
+            bundle_data_string = bundle_data.getString("bundle_data");
+            bundle_data_json = s.string_to_json(bundle_data_string);
+
+        }else{
+            Toast.makeText(this, "null user details", Toast.LENGTH_SHORT).show();
+        }
+
+
+        project_name = (TextView) findViewById(R.id.admin_project_project_name);
+        project_start_date = (TextView) findViewById(R.id.admin_project_project_start_date);
+        project_end_date = (TextView) findViewById(R.id.admin_project_project_end_date);
+        project_id = (TextView) findViewById(R.id.admin_project_project_id);
+
+        try{
+
+            project_name.setText(bundle_data_json.getString("project_name"));
+            project_start_date.setText(bundle_data_json.getString("project_start_date"));
+            project_end_date.setText(bundle_data_json.getString("project_end_date"));
+            project_id.setText(bundle_data_json.getString("project_id"));
+
+        }catch (JSONException e) {
+            Log.e("json ex", "json exception in oncreate of admin project");
+        }
+        // end of handle state
+
+
+
         init();
-    }
 
-    public void effect_response(JSONArray response) {
 
-                        try{
-
-                            // Toast.makeText(home_admin.this, response.toString(), Toast.LENGTH_SHORT).show();
-
-                        for(int i = 0; i < response.length(); i++) {
-
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            shift p = new shift();
-
-                            p.shift_id = jsonObject.getString("shift_id");
-                            p.shift_description = jsonObject.getString("shift_description");
-                            p.shift_datetime= jsonObject.getString("shift_datetime");
-                            p.contractor_id = jsonObject.getString("contracter_id");
-
-                            shifts.add(p);
-
-                            shift_adapter.notifyDataSetChanged();
-
-                        }
-                        } catch (JSONException e){
-                            e.printStackTrace();
-                        }
     }
 
     private void fill_data(){
 
         // TODO : fetch data
-        shifts.clear();
+        packages.clear();
+        make_request();
 
-        String url = data_wrapper.BASE_URL_TEST;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-
-                            effect_response(new JSONArray(response));
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }
-
-        ){
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                return build_shift_map();
-            }
-        };
-
-
-        Volley.newRequestQueue(this).add(stringRequest);
 
     }
-
-    public Map build_shift_map(){
-
-        Map <String, String> shift_map  = new HashMap<>();
-
-        shift_map.put("project_id", data_wrapper.TEMP_PROJECT_ID);
-
-        shift_map.put("module", data_wrapper.QMODULE_SHIFT);
-        shift_map.put("query_type", data_wrapper.QTYPE_O);
-        shift_map.put("query", data_wrapper.Q_READ_SHIFT);
-
-        return shift_map;
-
-    }
-
 }

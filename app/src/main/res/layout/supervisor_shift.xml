@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="io.github.isubham.myapplication.supervisor_shift">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Shift No"
+                android:textColor="#0000ff" />
+
+            <!--shift_type-->
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="get_shift_type"
+                    android:id="@+id/shift_type_1"
+                    android:text="one" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:onClick="get_shift_type"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/shift_type_2"
+                    android:text="two" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="get_shift_type"
+                    android:id="@+id/shift_type_3"
+                    android:text="three" />
+
+            </RadioGroup>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="0.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/worker_checkbox"
+            >
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+                        <!--take authentication-->
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Shift"
+                android:onClick="create_shift"
+                android:backgroundTint="#1aff00"
+                android:textColor="#e7ffe6"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="open_shift_auth_list"
+                android:text="Authenticate"
+                />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stop Shift"
+                android:backgroundTint="#ff0400"
+                android:textColor="#f9bebe"
+                />
+
+
+        </LinearLayout>
+
+
+</LinearLayout>

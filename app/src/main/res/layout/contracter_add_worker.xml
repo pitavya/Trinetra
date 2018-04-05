@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context="io.github.isubham.myapplication.contracter_add_worker">
+
+    <!--aadhar_id, worker_name, worker_type, job designation-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Worker's Aadhar Id"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/c_a_w_aadhar_id"
+        android:inputType="number" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Worker's Name"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/c_a_w_worker_name"
+        android:inputType="textEmailAddress" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Worker Type"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skilled Permanent"
+            android:id="@+id/c_a_w_worker_type_1"
+            android:onClick="get_worker_type"
+            />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Semi-Skilled Permanent"
+            android:id="@+id/c_a_w_worker_type_2"
+            android:onClick="get_worker_type"
+            />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Un-Skilled Permanent"
+            android:id="@+id/c_a_w_worker_type_3"
+            android:onClick="get_worker_type"
+            />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skilled Temporary"
+            android:id="@+id/c_a_w_worker_type_4"
+            android:onClick="get_worker_type"
+            />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skilled Temporary"
+            android:id="@+id/c_a_w_worker_type_5"
+            android:onClick="get_worker_type"
+            />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Un-Skilled Temporary"
+            android:id="@+id/c_a_w_worker_type_6"
+            android:onClick="get_worker_type"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Worker's Fingerprint"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/c_a_w_worker_fingerprint"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="create_new_worker"
+        android:textStyle="bold"
+        android:text="Create Worker"
+        android:textColor="#0000ff"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="back_to"
+        android:textStyle="bold"
+        android:text="Cancel"
+        />
+
+
+</LinearLayout>

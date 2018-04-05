@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.isubham.myapplication">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,13 +20,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home_admin" />
+        <activity android:name=".admin_home" />
         <activity android:name=".admin_create_project" />
         <activity android:name=".admin_project" />
-        <activity android:name=".supervisor_add_worker" />
+        <activity android:name=".contracter_add_worker" />
         <activity android:name=".project_users" />
         <activity android:name=".project_worker" />
-        <activity android:name=".add_user_project"></activity>
+        <activity android:name=".add_user_project" />
+        <activity android:name=".admin.admin_home" />
+        <activity android:name=".contracter_home" />
+        <activity android:name=".supervisor_home" />
+        <activity android:name=".admin_package" />
+        <activity android:name=".admin_create_package" />
+        <activity android:name=".admin_add_admin_project" />
+        <activity android:name=".admin_add_contracter_package" />
+        <activity android:name=".contracter_project" />
+        <activity android:name=".contracter_package" />
+        <activity android:name=".supervisor_project" />
+        <activity android:name=".supervisor_package" />
+        <activity android:name=".contracter_view_manpower" />
+        <activity android:name=".contracter_assign_supervisor" />
+        <activity android:name=".contracter_assign_manpower" />
+        <activity android:name=".supervisor_shift" />
+        <activity android:name=".supervisor_authentication" />
+        <activity android:name=".supervisor_authenticate_worker"></activity>
     </application>
 
 </manifest>

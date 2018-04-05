@@ -1,6 +1,7 @@
 package io.github.isubham.myapplication;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -71,7 +72,6 @@ public class create_account extends volley_wrapper {
                 account_type = data_wrapper.AC_CONTRACTOR;break;
             case R.id.account_type_supervisor:
                 account_type = data_wrapper.AC_SUPERVISOR;break;
-            default:account_type = data_wrapper.AC_ADMIN;
         }
 
     }
@@ -88,117 +88,74 @@ public class create_account extends volley_wrapper {
 
         Map<String, String> user_data = new HashMap<String, String>();
 
-        user_data.put("email",          s.text(email));
-        user_data.put("password",       s.salty(s.text(password)));
-        user_data.put("user_type",      account_type);
-        user_data.put("aadhar_id",      s.text(aadhar_id));
-        user_data.put("name",           s.text(name));
+        user_data.put(data_wrapper.Q_PARAM_USER_EMAIL,     s.text(email));
+        user_data.put(data_wrapper.Q_PARAM_USER_PASSWORD,  s.salty(s.text(password)));
+        user_data.put(data_wrapper.Q_PARAM_USER_USER_TYPE, account_type);
+        user_data.put(data_wrapper.Q_PARAM_USER_AADHAR_ID, s.text(aadhar_id));
+        user_data.put(data_wrapper.Q_PARAM_USER_NAME,      s.text(name));
 
         // flags for query
-        user_data.put("module",         data_wrapper.QMODULE_USER);
-        user_data.put("query_type",     data_wrapper.QTYPE_I);
-        user_data.put("query",          data_wrapper.Q_CREATE_ACCOUNT);
+        user_data.put(data_wrapper.MODUL,     data_wrapper.QMODULE_USER);
+        user_data.put(data_wrapper.QUERY,     data_wrapper.Q_CREATE_ACCOUNT);
+        user_data.put(data_wrapper.QTYPE,     data_wrapper.QTYPE_I);
+
+        Log.e("makeparams", user_data.toString());
 
         return user_data;
 
     }
 
     @Override
-    public void handle_response(JSONObject jsonObject) {
+    public void handle_response(String response) {
+
+        Log.i("handle response jsonobject", response);
+        JSONObject jsonObject;
+
         try {
 
-            String id = jsonObject.get("status").toString();
+            jsonObject  = new JSONObject(response);
+            
 
-            if (!id.equals("0")) {
-                /* TODO : go to sign in */
-                Toast.makeText(create_account.this, "Account create id : " + id, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(create_account.this, "Email or Aadhar already exists", Toast.LENGTH_SHORT).show();
+            String id = jsonObject.get("status").toString();
+                
+            switch (id) {
+                case data_wrapper.RESPONSE_EMAIL_EXISTS:
+                    show_dialog("aadhar exists");
+                    break;
+
+                case data_wrapper.RESPONSE_AADHAR_EXISTS:
+                    show_dialog("aadhar exists");
+                    break;
+
+                case data_wrapper.RESPONSE_EMAIL_AND_PASSWORD_EXISTS:
+                    show_dialog("email and aadhar exists");
+                    break;
+
+                default: {
+
+                    startActivity(new Intent(create_account.this,sign_in.class));
+
+                }
+
             }
-        }catch (JSONException e){
-            handle_jsonexception_error(e);
+            }catch (JSONException e) {
+            Log.e("143", "JSON error on line 143");
         }
+           
+    }
+
+    public void show_dialog(String message){
+        Log.i("show_dialog", message);
+
     }
 
     @Override
     public void make_volley_request(StringRequest stringRequest) {
 
+        Log.i("make volley request","volley request made");
+
         Volley.newRequestQueue(this).add(stringRequest);
 
-    }
-
-    @Override
-    public void handle_error_response(VolleyError error) {
-
-    }
-
-    @Override
-    public void handle_jsonexception_error(JSONException e) {
-
-    }
-
-
-    class fetch_url extends AsyncTask<String, String, String> {
-
-        public void make_url() {
-
-            try{
-
-             String url = URLEncoder.encode("http:localhost.com/subham/trinetra/design.php",
-                     "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                Log.e("line 93", "invalid encoding ");
-            }
-        }
-
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onProgressUpdate(String... v) {
-
-        }
-
-        @Override
-        protected String doInBackground(String... strings)  {
-
-            JSONObject res = new JSONObject();
-            try {
-                res = network.get_json_from_url("www.google.com");
-            }catch (IOException e){
-                e.printStackTrace();
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
-
-            Iterator<?> keys = res.keys();
-
-            StringBuilder temp = new StringBuilder();
-
-            while(keys.hasNext()) {
-
-                try{
-                    String key = (String)keys.next();
-                    temp.append(
-                            '\t' + key + " "
-                            + res.get(key) + " "
-                            + "\n"
-                    );
-                } catch (JSONException e){
-                    e.printStackTrace();
-                }
-
-            }
-
-            return temp.toString();
-        }
-
-
-        @Override
-        protected void onPostExecute(String s) {
-        }
     }
 
 

@@ -32,7 +32,7 @@ public class home extends AppCompatActivity {
 
     public void open_admin_panel(View V){
 
-        startActivity(new Intent(home.this, home_admin.class));
+        startActivity(new Intent(home.this, admin_home.class));
 
     }
 
@@ -52,7 +52,7 @@ public class home extends AppCompatActivity {
 
     public void open_add_worker_supervisor(View V) {
 
-        startActivity(new Intent(home.this, supervisor_add_worker.class));
+        startActivity(new Intent(home.this, contracter_add_worker.class));
 
     }
 

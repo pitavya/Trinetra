@@ -1,6 +1,7 @@
 package io.github.isubham.myapplication;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -58,13 +59,12 @@ public class sign_in extends volley_wrapper
 
         Map<String, String> user_data = new HashMap<String, String>();
 
-        user_data.put("email", s.text(email));
-        user_data.put("password", s.salty(s.text(password)));
+        user_data.put(data_wrapper.Q_PARAM_USER_EMAIL, s.text(email));
+        user_data.put(data_wrapper.Q_PARAM_USER_PASSWORD, s.salty(s.text(password)));
 
-        // flags for query
-        user_data.put("module", data_wrapper.QMODULE_USER);
-        user_data.put("query_type", data_wrapper.QTYPE_O);
-        user_data.put("query", data_wrapper.Q_SIGN_IN);
+        user_data.put(data_wrapper.MODUL, data_wrapper.QMODULE_USER);
+        user_data.put(data_wrapper.QTYPE, data_wrapper.QTYPE_O);
+        user_data.put(data_wrapper.QUERY, data_wrapper.Q_SIGN_IN);
 
         Log.i("makeparams in sign_in", user_data.toString());
 
@@ -73,35 +73,52 @@ public class sign_in extends volley_wrapper
     }
 
     @Override
-    public void handle_response(JSONObject jsonObject) {
+    public void handle_response(String response) {
 
-        Log.i("handle_response sign_in", jsonObject.toString());
 
-        // if auth not found
+        JSONObject user_details;
+
+        Log.i("handle_response sign_in", response);
+
         try {
-            if (jsonObject.has("status")) {
+            user_details = new JSONObject(response);
+
+            // if auth not found
+            if (user_details.has("status")) {
                 // give wrong credential info
                 si_status.setText("Email or password don't match");
             }
 
             // else goto user_panel depending on the user_type
-
+            // TODO add details to bundle for next activity
             else {
-                String user_type =
-                (jsonObject.getJSONObject(email.getText().toString())).getString("user_type");
-                if (user_type == data_wrapper.AC_ADMIN)
-                        Toast.makeText(this, "goto admin", Toast.LENGTH_SHORT).show();
-                        // TODO : goto admin
+                JSONObject user_detail = user_details.getJSONObject(email.getText().toString());
+                String user_type = user_detail.getString("user_type");
+                Log.e("user_type", user_type);
 
-                else if(user_type == data_wrapper.AC_CONTRACTOR)
-                        Toast.makeText(this, "goto contracter", Toast.LENGTH_SHORT).show();
-                        // TODO : goto contracter
+                Intent intent;
+                switch (user_type) {
+                    case data_wrapper.AC_ADMIN:
+                        intent = new Intent(sign_in.this, admin_home.class);
+                        break;
 
-                else{
-                    Toast.makeText(this, "goto supervisor", Toast.LENGTH_SHORT).show();
-                    // TODO : goto supervisor
+                    case data_wrapper.AC_CONTRACTOR:
+                        intent = new Intent(sign_in.this, contracter_home.class);
+                        break;
+
+                    case data_wrapper.AC_SUPERVISOR:
+                         intent = new Intent(sign_in.this, supervisor_home.class);
+                        break;
+
+                    default:
+                          intent = new Intent(sign_in.this, create_account.class);
+
                 }
-                }
+
+                intent.putExtra("bundle_data", s.json_to_string(user_detail,
+                                "user_email", email.getText().toString()));
+                startActivity(intent);
+            }
 
        }catch (JSONException e){
             Log.e("handle_response sign_in", e.getMessage());
@@ -118,18 +135,5 @@ public class sign_in extends volley_wrapper
 
     }
 
-    @Override
-    public void handle_error_response(VolleyError error) {
-
-        Log.i("handle_error_response", error.toString());
-
-    }
-
-    @Override
-    public void handle_jsonexception_error(JSONException e) {
-
-        Log.i("handle_jsonexception", e.toString());
-
-    }
 }
 
