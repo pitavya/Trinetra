@@ -17,13 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -41,12 +36,8 @@ public class supervisor_shift extends volley_wrapper {
     // state =>
     // TODO stats from previous activities
 
-    String shift_id = "7";
-    String user_id  = "20",
-    package_id = "5",
-    project_id = "5",
+    String shift_id, user_id  , package_id, project_id;
     // => TODO add script to get contracter_id
-    contracter_id = "17";
 
 
     create_shift_volley create_shift_volley;
@@ -81,7 +72,6 @@ public class supervisor_shift extends volley_wrapper {
                 user_id = bundle_jsonobject.getString("user_id");
                 project_id = bundle_jsonobject.getString("project_id");
                 package_id = bundle_jsonobject.getString("package_id");
-                contracter_id = bundle_jsonobject.getString("user_added_id");
             } catch (JSONException e) {
 
             }
@@ -197,12 +187,11 @@ public class supervisor_shift extends volley_wrapper {
         // query params to fetch worker list
         Map new_attendence = new HashMap<String, String>();
         // contracter id
-        new_attendence.put("user_id", contracter_id);
-        new_attendence.put("package_id", package_id);
-
         new_attendence.put("module", "worker_package");
-        new_attendence.put("query", "read_workers_package");
+        new_attendence.put("query", "read_workers_package_per_contracter");
         new_attendence.put("query_type", "o");
+        new_attendence.put("user_added_id", user_id);
+        new_attendence.put("package_id", package_id);
 
         return new_attendence;
 
@@ -211,18 +200,15 @@ public class supervisor_shift extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
-
-        // create checklist
         try{
-
-            JSONObject worker_list =
-                    new JSONObject(response);
+            Log.i("handle_response ", response);
+            JSONObject worker_list = new JSONObject(response);
+            // create checklist
             add_checkbox_of_worker(worker_list);
 
         }catch (JSONException e){
             Log.e("JSON Ex", "exception in json of the worker list");
         }
-
     }
 
     public class create_shift_volley extends volley_wrapper{
@@ -239,8 +225,6 @@ public class supervisor_shift extends volley_wrapper {
 
                 Log.e("attendence", final_sorted_string);
 
-
-//
                 Map new_shift = new HashMap<String, String>();
 
                 new_shift.put("shift_date", shift_date);
@@ -291,7 +275,7 @@ public class supervisor_shift extends volley_wrapper {
     public void create_shift(View V){
 
         create_shift_volley = new create_shift_volley();
-       create_shift_volley.make_request();
+        create_shift_volley.make_request();
 
     }
 
@@ -305,47 +289,4 @@ public class supervisor_shift extends volley_wrapper {
 
 
 
-
-        public void insert_attendence_to_shift(View V) {
-
-        (new volley_wrapper(){
-            @Override
-            public Map makeParams() {
-
-                Map new_attendence = new HashMap<String, String>();
-                new_attendence.put("shift_id", shift_id);
-                new_attendence.put("shift_attendence", shift_attendence);
-
-                new_attendence.put("module", "shift");
-                new_attendence.put("query", "add_attendence_to_shift");
-                new_attendence.put("query_type", "u");
-
-                return new_attendence;
-            }
-
-            @Override
-            public void handle_response(String response) {
-                // if attendence is fetched or not
-                try{
-                    JSONObject status_response =
-                            new JSONObject(response);
-
-                    String status = status_response.getString("status");
-                    if(status == "1"){
-                        Toast.makeText(this, "ATTENDENCE ADDED", Toast.LENGTH_SHORT).show();
-                    }
-                    if(status == "0") {
-                         Toast.makeText(this, "NO ATTENDENCE CHANGE", Toast.LENGTH_SHORT).show();
-                    }
-                }catch (JSONException e){
-                    Log.e("attendence_in_shift", "error on handle response");
-                }
-            }
-
-            @Override
-            public void make_volley_request(StringRequest stringRequest) {
-                Volley.newRequestQueue(this).add(stringRequest);
-            }
-        }).make_request();
-    }
 }

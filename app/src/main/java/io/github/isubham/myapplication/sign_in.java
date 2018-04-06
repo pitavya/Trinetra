@@ -91,7 +91,7 @@ public class sign_in extends volley_wrapper
             // if auth not found
             if (user_details.has("status")) {
                 // give wrong credential info
-                si_status.setText("Email or password don't match");
+                Toast.makeText(this, "Email and password dont match", Toast.LENGTH_SHORT).show();
             }
 
             // else goto user_panel depending on the user_type
@@ -126,7 +126,7 @@ public class sign_in extends volley_wrapper
             }
 
        }catch (JSONException e){
-            Log.e("handle_response sign_in", e.getMessage());
+            Log.e("handle_response sign_in", "json exception error");
         }
 
     }

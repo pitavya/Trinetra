@@ -117,6 +117,7 @@ public class admin_add_admin_project extends volley_wrapper {
         try{
             user_id = bundle_data_json.getString("user_id");
             project_id = bundle_data_json.getString("project_id");
+            Toast.makeText(this, "user_id of admin " + user_id, Toast.LENGTH_SHORT).show();
 
         }catch (JSONException e){
             Log.e("admin_add_admin_project",

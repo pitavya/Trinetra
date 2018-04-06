@@ -47,7 +47,10 @@ public class shift_adapter extends
     public void onBindViewHolder(shift_adapter.shift_viewholder holder, int position) {
             holder.shift_id.setText(    shifts.get(position).shift_id);
             holder.shift_datetime.setText(          shifts.get(position).shift_datetime);
-        }
+
+            holder.shift_type.setText(          shifts.get(position).shift_type);
+
+    }
 
     public class shift_viewholder extends RecyclerView.ViewHolder {
 

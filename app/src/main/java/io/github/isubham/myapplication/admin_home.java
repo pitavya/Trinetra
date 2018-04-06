@@ -123,7 +123,7 @@ public class admin_home extends volley_wrapper {
     }
 
     // TODO replace it with bundle user_id
-    String user_id = "14";
+    String user_id = "";
 
     public void to_add_new_project(View V){
 
@@ -257,6 +257,8 @@ public class admin_home extends volley_wrapper {
             name.setText(user_details_json.getString("name"));
             email.setText(user_details_json.getString("user_email"));
             aadhar_id.setText(user_details_json.getString("aadhar_id"));
+
+            user_id = user_details_json.getString("user_id");
 
 
         }catch (JSONException e) {

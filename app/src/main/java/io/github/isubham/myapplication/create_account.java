@@ -120,7 +120,7 @@ public class create_account extends volley_wrapper {
                 
             switch (id) {
                 case data_wrapper.RESPONSE_EMAIL_EXISTS:
-                    show_dialog("aadhar exists");
+                    show_dialog("email exists");
                     break;
 
                 case data_wrapper.RESPONSE_AADHAR_EXISTS:

@@ -115,7 +115,6 @@ public class supervisor_package extends volley_wrapper {
                         bundle_jsonobject.getString("package_name");
                 package_start_date_string =
                         bundle_jsonobject.getString("package_start_date");
-
                 package_end_date_string =
                         bundle_jsonobject.getString("package_end_date");
 
@@ -150,6 +149,8 @@ public class supervisor_package extends volley_wrapper {
         supervisor_pacakge_to_supervisor_shift.putExtra("bundle_data_sup_pkg_to_sup_shift",
                 bundle_string
                 );
+
+        startActivity(supervisor_pacakge_to_supervisor_shift);
     }
 
     @Override

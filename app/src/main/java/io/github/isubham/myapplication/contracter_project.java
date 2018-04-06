@@ -207,7 +207,10 @@ public class contracter_project extends volley_wrapper {
 
     Bundle bundle;
     String bundle_string;
-    JSONObject bundle_jsonobject;
+    JSONObject bundle_data_json;
+
+
+    TextView project_name, project_start_date, project_end_date, project_id;
 
 
     @Override
@@ -240,6 +243,32 @@ public class contracter_project extends volley_wrapper {
 
 
         // => end of state
+
+        bundle_data_json = s.string_to_json(bundle_string);
+
+        project_name = (TextView) findViewById(R.id.contracter_project_project_name);
+        project_start_date = (TextView) findViewById(R.id.contracter_project_project_start_date);
+        project_end_date = (TextView) findViewById(R.id.contracter_project_project_end_date);
+        project_id = (TextView) findViewById(R.id.contracter_project_project_id);
+
+        //
+        try{
+
+            project_name.setText(bundle_data_json.getString("project_name"));
+            project_start_date.setText(bundle_data_json.getString("project_start_date"));
+            project_end_date.setText(bundle_data_json.getString("project_end_date"));
+            project_id.setText(bundle_data_json.getString("project_id"));
+
+            // setting project_id string
+            project_id_string = bundle_data_json.getString("project_id");
+
+        }catch (JSONException e) {
+            Log.e("json ex", "json exception in oncreate of admin project");
+        }
+        //
+        // end of handle state
+
+
 
 
         fill_data();

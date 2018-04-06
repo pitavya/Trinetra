@@ -31,8 +31,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_project_name"
             android:textSize="20dp"
+            android:id="@+id/contracter_project_project_name"
             android:text="Project name"
             />
 
@@ -46,21 +46,29 @@
             <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_project_start_date"
                 android:layout_weight="1"
                 android:text="start date"
+                android:id="@+id/contracter_project_project_start_date"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_project_end_date"
+            android:id="@+id/contracter_project_project_end_date"
             android:layout_weight="1"
             android:text="end date"
             />
 
         </LinearLayout>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contracter_project_project_id"
+            android:layout_weight="1"
+            android:text="project id"
+            />
 
             <LinearLayout
                 android:orientation="horizontal"

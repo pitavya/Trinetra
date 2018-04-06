@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -26,10 +27,12 @@ import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
 import io.github.isubham.myapplication.utility.volley_wrapper;
 
+import io.github.isubham.myapplication.utility.s;
+
 
 public class supervisor_authentication extends volley_wrapper {
 
-    String shift_id = "7";
+    String shift_id;
     @Override
     public Map makeParams() {
 
@@ -122,7 +125,7 @@ public class supervisor_authentication extends volley_wrapper {
 
     // TODO replace it with bundle user_id
     // contracter id of cona
-    String user_id = "17";
+    String user_id;
 
 
     RecyclerView auth_rv;
@@ -156,9 +159,9 @@ public class supervisor_authentication extends volley_wrapper {
     }
 
 
-    public void contracter_add_manpower(View V) {
-        // startActivity(new Intent(supervisor_authentication.this, supervisor_worker_auth.class));
-    }
+    Bundle bundle;
+    String bundle_string;
+    JSONObject bundle_jsonobject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +169,27 @@ public class supervisor_authentication extends volley_wrapper {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supervisor_authentication);
         init();
-        fill_data();
+
+
+        // model
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+
+            // => get string, json and assign states
+            bundle_string = bundle.getString("bundle_data_sup_pkg_to_sup_auth");
+            bundle_jsonobject = s.string_to_json(bundle_string);
+
+            // => parsing state from model
+            try {
+                shift_id = bundle_jsonobject.getString("shift_id");
+            } catch (JSONException e) {
+                Log.e("contracter_package", "json exception in the project");
+            }
+
+            Toast.makeText(this, "shift_id" + shift_id, Toast.LENGTH_SHORT).show();
+
+            fill_data();
+        }
     }
 
 

@@ -165,7 +165,7 @@ public class contracter_add_worker extends volley_wrapper {
         if (bundle != null){
 
             bundle_string = bundle.getString(
-                    "bundle_data_contracter_home_to_contracter_view_manpower"
+                    "bundle_data_contracter_home_to_contracter_add_manpower"
             );
             try{
                 // => set user_id
