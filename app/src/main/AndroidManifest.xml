@@ -32,7 +32,6 @@
         <activity android:name=".project_users" />
         <activity android:name=".project_worker" />
         <activity android:name=".add_user_project" />
-        <activity android:name=".admin.admin_home" />
         <activity android:name=".contracter_home" />
         <activity android:name=".supervisor_home" />
         <activity android:name=".admin_package" />
