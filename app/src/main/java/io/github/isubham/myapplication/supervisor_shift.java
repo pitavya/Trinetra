@@ -29,30 +29,14 @@ import java.util.TreeSet;
 
 import io.github.isubham.myapplication.utility.volley_wrapper;
 
+import io.github.isubham.myapplication.utility.s;
+
 public class supervisor_shift extends volley_wrapper {
 
     public void open_shift_auth_list(View V){
         startActivity(new Intent(supervisor_shift.this,
                 supervisor_authentication.class));
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.supervisor_shift);
-        worker_checkbox = (LinearLayout) findViewById(R.id.worker_checkbox);
-        make_request();
-
-
-        attendence_set = new TreeSet<>();
-    }
-
-    LinearLayout worker_checkbox;
-
-    // TODO get this from supervisor_shift
-
-    // TODO shift_date => from system
-    // TODO shift_type => from checkbox
 
     // state =>
     // TODO stats from previous activities
@@ -61,13 +45,56 @@ public class supervisor_shift extends volley_wrapper {
     String user_id  = "20",
     package_id = "5",
     project_id = "5",
+    // => TODO add script to get contracter_id
     contracter_id = "17";
 
+
     create_shift_volley create_shift_volley;
-
     String shift_type = "1", shift_date = "11-03-2018", shift_attendence ;
-
     SortedSet<String> attendence_set;
+
+    Bundle bundle;
+    String bundle_string;
+    JSONObject bundle_jsonobject;
+    LinearLayout worker_checkbox;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.supervisor_shift);
+        worker_checkbox = (LinearLayout) findViewById(R.id.worker_checkbox);
+        make_request();
+
+        attendence_set = new TreeSet<>();
+        // => bundle management
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+
+            // => get string, json and assign states
+            bundle_string = bundle.getString("bundle_data_sup_pkg_to_sup_shift");
+            bundle_jsonobject = s.string_to_json(bundle_string);
+
+            // => parsing state from model
+            try {
+                // assign states to user_id, project_id, package_id, contracter_id
+                user_id = bundle_jsonobject.getString("user_id");
+                project_id = bundle_jsonobject.getString("project_id");
+                package_id = bundle_jsonobject.getString("package_id");
+                contracter_id = bundle_jsonobject.getString("user_added_id");
+            } catch (JSONException e) {
+
+            }
+
+            // => end of bundle management
+        }
+    }
+
+
+    // TODO get this from supervisor_shift
+
+    // TODO shift_date => from system
+    // TODO shift_type => from checkbox
 
     // list of worker => checkbox of workername in worker_checkbox
     public void add_checkbox_of_worker(JSONObject workers){
@@ -82,9 +109,7 @@ public class supervisor_shift extends volley_wrapper {
         *   }
         *
         * */
-        // TODO itrate in response from worker in pacakge under contracter
-
-
+        // TODO iterate in response from worker in pacakge under contracter
 
         try{
 

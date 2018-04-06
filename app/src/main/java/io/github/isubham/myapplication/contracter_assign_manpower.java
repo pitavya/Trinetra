@@ -84,12 +84,42 @@ public class contracter_assign_manpower extends volley_wrapper {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    Bundle bundle;
+    String bundle_string;
+    JSONObject bundle_jsonobject;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contracter_assign_manpower);
 
         new_worker_aadhar_edittext = findViewById(R.id.new_worker_aadhar_id);
+
+
+            // => bundle => model => state
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+            bundle_string = bundle.getString("bundle_data_ctr_package_to_ctr_assign_manpower");
+            bundle_jsonobject = s.string_to_json(bundle_string);
+
+            try{
+                project_id = bundle_jsonobject.getString("project_id");
+                user_id = bundle_jsonobject.getString("user_id");
+                package_id = bundle_jsonobject.getString("package_id");
+
+                Toast.makeText(this, "states confirmed " +
+                        "project_id " + project_id+
+                        "package_id " + package_id+
+                        "user_id  "+ user_id,
+                        Toast.LENGTH_SHORT).show();
+
+            }catch (JSONException e){
+                Log.e("contracter_assign_s", "json exception");
+            }
+        }
+
 
     }
 

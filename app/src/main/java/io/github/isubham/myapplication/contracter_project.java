@@ -29,6 +29,7 @@ import io.github.isubham.myapplication.adapters.package_adapter;
 import io.github.isubham.myapplication.model.package_;
 import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
+import io.github.isubham.myapplication.utility.s;
 import io.github.isubham.myapplication.utility.volley_wrapper;
 
 public class contracter_project extends volley_wrapper {
@@ -40,9 +41,11 @@ public class contracter_project extends volley_wrapper {
             get_project_list_param.put("user_added_id", user_id);
             get_project_list_param.put("module", data_wrapper.QMODULE_PACKAGE);
             get_project_list_param.put("query_type", data_wrapper.QTYPE_O);
-            get_project_list_param.put("query", "contracter_read_packages");
+            get_project_list_param.put("query", "contracter_read_packages_per_project");
+            get_project_list_param.put("project_id", project_id_string);
 
-            Log.i("makeparain ctr home", get_project_list_param.toString());
+
+        Log.i("makeparain ctr home", get_project_list_param.toString());
 
             return get_project_list_param;
 
@@ -130,8 +133,8 @@ public class contracter_project extends volley_wrapper {
 
     // TODO replace it with bundle user_id
     // contracter id of cona
-    String user_id = "17";
-
+    String user_id;
+    String project_id_string;
     public void to_add_new_project(View V){
 
         startActivity(new Intent(contracter_project.this,
@@ -146,6 +149,7 @@ public class contracter_project extends volley_wrapper {
     private List<package_> packages;
 
     private void init() {
+
         package_rv = (RecyclerView) findViewById(R.id.c_p_package_recycleview);
         linearLayoutManager = (new LinearLayoutManager(this));
         packages = new ArrayList<>();
@@ -161,13 +165,38 @@ public class contracter_project extends volley_wrapper {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                startActivity(new Intent(
+                                Intent contracter_project_to_contracter_package =
+                                        new Intent(
                                         contracter_project.this,
-                                        contracter_package.class));
+                                        contracter_package.class);
+
+                                // => add package details
+                                 String package_id = ((TextView)view.findViewById(R.id.rl_package_id))
+                                        .getText().toString().trim();
+
+                                 String package_name = ((TextView)view.findViewById(R.id.rl_package_name))
+                                        .getText().toString().trim();
+
+                                 String package_start_date = ((TextView)view.findViewById(R.id.rl_package_start_date))
+                                        .getText().toString().trim();
+
+                                 String package_end_date = ((TextView)view.findViewById(R.id.rl_package_end_date))
+                                        .getText().toString().trim();
+
+
+                                contracter_project_to_contracter_package.putExtra("bundle_data_ctr_project_to_ctr_package",
+                                        bundle_string + ","+
+                                        "package_id:"+package_id+","+
+                                        "package_name:"+package_name+","+
+                                        "package_start_date:"+package_start_date+","+
+                                        "package_end_date:"+package_end_date
+                                );
+
+
+                                startActivity(contracter_project_to_contracter_package);
+
                             }
                         }));
-
-
 
     }
 
@@ -176,12 +205,43 @@ public class contracter_project extends volley_wrapper {
         startActivity(new Intent(contracter_project.this, contracter_add_worker.class));
     }
 
+    Bundle bundle;
+    String bundle_string;
+    JSONObject bundle_jsonobject;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contracter_project);
         init();
+
+
+        // => state
+
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+
+            // => get string and json and assign to state => user_id
+            bundle_string = bundle.getString("bundle_data_ctr_home_to_ctr_project");
+
+            try{
+
+                user_id = s.string_to_json(bundle_string).getString("user_id");
+                project_id_string = s.string_to_json(bundle_string).getString("project_id");
+
+            }catch (JSONException e){
+                Log.e("contracter project", "json exception while parsing user_id");
+            }
+        }
+
+
+        // => end of state
+
+
         fill_data();
     }
 

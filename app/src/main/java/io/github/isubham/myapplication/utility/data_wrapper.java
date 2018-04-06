@@ -41,10 +41,10 @@ public class data_wrapper {
     // query String
     //=============
 
-    // sleek
-    public static String BASE_URL_LOCAL = "http://192.168.31.20/trinetra/design.php";
+    // sleek public static String BASE_URL_LOCAL = "http://192.168.31.20/trinetra/design.php";
 
-    // my android public static String BASE_URL_LOCAL = "http://192.168.43.122/trinetra/design.php";
+    // my android
+    public static String BASE_URL_LOCAL = "http://192.168.43.122/trinetra/design.php";
 
     /* TODO : add base url */
     public static String BASE_URL_TEST = "https://trinetra.000webhostapp.com/test/design.php";

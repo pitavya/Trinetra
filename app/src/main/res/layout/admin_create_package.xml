@@ -88,7 +88,7 @@ tools:context="io.github.isubham.myapplication.admin_create_package">
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Project"
+        android:text="Create Package"
         android:onClick="create_new_package"
 
         />

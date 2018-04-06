@@ -19,12 +19,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Supervisor name"
+            android:id="@+id/supervisor_home_supervisor_name"
             android:textSize="20sp" />
 
         <!--email-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/supervisor_home_supervisor_email"
             android:text="Supervisor email"
             android:textSize="16sp" />
 
@@ -32,7 +34,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Supervisor icon"
+            android:text="Supervisor aadhar"
+            android:id="@+id/supervisor_home_supervisor_aadhar"
             android:textSize="16sp" />
 
 

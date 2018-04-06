@@ -27,6 +27,8 @@ import io.github.isubham.myapplication.model.project;
 import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
 import io.github.isubham.myapplication.utility.volley_wrapper;
+import io.github.isubham.myapplication.utility.s;
+
 
 public class contracter_home extends volley_wrapper {
 
@@ -47,7 +49,22 @@ public class contracter_home extends volley_wrapper {
 
 
     public void contracter_view_manpower(View V){
-        startActivity(new Intent(contracter_home.this, contracter_view_manpower.class));
+        Intent contracter_view_manpower =
+                new Intent(contracter_home.this, contracter_view_manpower.class);
+        contracter_view_manpower.putExtra("bundle_data_contracter_home_to_contracter_view_manpower",
+                user_details_string
+                );
+        startActivity(contracter_view_manpower);
+    }
+
+
+    public void contracter_add_manpower(View V) {
+        Intent contracter_add_manpower =
+                new Intent(contracter_home.this, contracter_add_worker.class);
+        contracter_add_manpower.putExtra("bundle_data_contracter_home_to_contracter_add_manpower",
+                user_details_string
+                );
+        startActivity(contracter_add_manpower);
     }
 
     @Override
@@ -126,14 +143,8 @@ public class contracter_home extends volley_wrapper {
 
     // TODO replace it with bundle user_id
     // contracter id of cona
-    String user_id = "17";
+    String user_id;
 
-    public void to_add_new_project(View V){
-
-        startActivity(new Intent(contracter_home.this,
-                admin_create_project.class));
-
-    }
 
 
     RecyclerView project_rv;
@@ -157,9 +168,50 @@ public class contracter_home extends volley_wrapper {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                startActivity(new Intent(
+                                Intent contracter_home_to_contracter_project =
+                                        new Intent(
                                         contracter_home.this,
-                                        contracter_project.class));
+                                        contracter_project.class);
+
+
+                                // TODO add bundle data
+                                           // get project details
+                                String project_id = ((TextView) view.findViewById(R.id.rl_project_id))
+                                        .getText().toString();
+
+                                String project_name = ((TextView) view.findViewById(R.id.rl_project_name))
+                                        .getText().toString();
+
+                                String project_start_date = ((TextView) view.findViewById(R.id.rl_project_start_date))
+                                        .getText().toString();
+
+
+                                String project_end_date = ((TextView) view.findViewById(R.id.rl_project_end_date))
+                                        .getText().toString();
+
+
+
+                                Log.i("info from admin_home ",
+                                        "project_id:"+project_id+","+
+                                        "project_name:"+project_name+","+
+                                        "project_start_date:"+project_start_date+","+
+                                        "project_end_date:"+project_end_date+","+
+                                                "user_id:"+user_id
+                                        );
+
+                                Toast.makeText(contracter_home.this, "project id " + project_id, Toast.LENGTH_SHORT).show();
+
+                                contracter_home_to_contracter_project
+                                        .putExtra("bundle_data_ctr_home_to_ctr_project",
+                                        user_details_string+","+
+                                        "project_id:"+project_id+","+
+                                        "project_name:"+project_name+","+
+                                        "project_start_date:"+project_start_date+","+
+                                        "project_end_date:"+project_end_date+","+
+                                                "user_id:"+user_id
+                                );
+
+                                startActivity(contracter_home_to_contracter_project );
                             }
                         }));
 
@@ -168,9 +220,11 @@ public class contracter_home extends volley_wrapper {
     }
 
 
-    public void contracter_add_manpower(View V) {
-        startActivity(new Intent(contracter_home.this, contracter_add_worker.class));
-    }
+
+    TextView email, name, aadhar_id;
+    Bundle user_details;
+    String user_details_string;
+    JSONObject user_details_json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +232,50 @@ public class contracter_home extends volley_wrapper {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contracter_home);
         init();
+
+
+        // => states
+                // handling state
+        user_details = getIntent().getExtras();
+
+        if(user_details != null) {
+
+             Toast.makeText(this, " user details parsed", Toast.LENGTH_SHORT).show();
+            user_details_string = user_details.getString("bundle_data");
+
+        }else{
+            Toast.makeText(this, "null user details", Toast.LENGTH_SHORT).show();
+        }
+
+
+            name = ((TextView) findViewById(R.id.contracter_home_contracter_name));
+            email = ((TextView) findViewById(R.id.contracter_home_contracter_email));
+            aadhar_id = ((TextView) findViewById(R.id.contracter_home_contracter_user_aadhar));
+
+
+        user_details_json = s.string_to_json(user_details_string);
+
+        try {
+
+            user_id = user_details_json.getString("user_id");
+
+            name.setText(user_details_json.getString("name"));
+            email.setText(user_details_json.getString("user_email"));
+            aadhar_id.setText(user_details_json.getString("aadhar_id"));
+
+
+        }catch (JSONException e) {
+            Log.e("json ex", "inside handle bundle function");
+        }
+
+
+
+
+        // bind ui to state
+
+
+
+        // => fetch data
         fill_data();
     }
 

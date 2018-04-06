@@ -25,8 +25,8 @@ public class admin_add_admin_project extends volley_wrapper {
     EditText new_admin_email;
 
     // TODO get this user_id from other activities
-    String project_id = "5";
-    String user_id = "14";
+    String project_id ;
+    String user_id;
 
 
     @Override
@@ -69,14 +69,11 @@ public class admin_add_admin_project extends volley_wrapper {
 
                 default : {
                     Toast.makeText(this, "ADMIN ADDED", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(admin_add_admin_project.this, admin_project.class));
                 }
             }
-
         }catch (JSONException e){
             Log.e("JSONEX", "JSON exception in admin add admin project handling repsonse");
         }
-
     }
 
     @Override
@@ -84,13 +81,52 @@ public class admin_add_admin_project extends volley_wrapper {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    Bundle bundle_data;
+    String bundle_data_string;
+    JSONObject bundle_data_json;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_add_admin_project);
 
         new_admin_email = findViewById(R.id.new_admin_email);
+        // => states
 
+
+        // handle state
+        bundle_data = getIntent().getExtras();
+
+        //
+        if(bundle_data != null) {
+
+            bundle_data_string = bundle_data
+                    .getString("bundle_data_admin_project_to_admin_add_admin");
+
+            Log.e("bundle_json_project", bundle_data_string);
+            // Toast.makeText(this, "bundle not empty", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(this, "null user details", Toast.LENGTH_SHORT).show();
+        }
+
+        //
+
+        bundle_data_json = s.string_to_json(bundle_data_string);
+
+        try{
+            user_id = bundle_data_json.getString("user_id");
+            project_id = bundle_data_json.getString("project_id");
+
+        }catch (JSONException e){
+            Log.e("admin_add_admin_project",
+                     "json exception while setting project_id and user_id");
+        }
+
+
+        // => end of states
+
+        // bundle_data_admin_project_to_admin_add_admin
     }
 
 

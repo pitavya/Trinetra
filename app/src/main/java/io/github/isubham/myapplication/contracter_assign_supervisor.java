@@ -41,8 +41,9 @@ public class contracter_assign_supervisor extends volley_wrapper {
 
         Map<String, String> new_admin_params = new HashMap<>();
 
-        new_admin_params.put("user_adder_id", user_id);
         new_admin_params.put("user_added_email", new_admin);
+
+        new_admin_params.put("user_adder_id", user_id);
         new_admin_params.put("project_id", project_id);
         new_admin_params.put("package_id", package_id);
 
@@ -88,12 +89,40 @@ public class contracter_assign_supervisor extends volley_wrapper {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    Bundle bundle;
+    String bundle_string;
+    JSONObject bundle_jsonobject;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contracter_assign_supervisor);
 
         new_supervisor_email = findViewById(R.id.new_supervisor_email);
+
+        // => bundle => model => state
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+            bundle_string = bundle.getString("bundle_data_ctr_package_to_ctr_assign_supervisor");
+            bundle_jsonobject = s.string_to_json(bundle_string);
+
+            try{
+                project_id = bundle_jsonobject.getString("project_id");
+                user_id = bundle_jsonobject.getString("user_id");
+                package_id = bundle_jsonobject.getString("package_id");
+
+                Toast.makeText(this, "states confirmed " +
+                        "project_id " + project_id+
+                        "package_id " + package_id+
+                        "user_id  "+ user_id,
+                        Toast.LENGTH_SHORT).show();
+
+            }catch (JSONException e){
+                Log.e("contracter_assign_s", "json exception");
+            }
+        }
 
     }
 

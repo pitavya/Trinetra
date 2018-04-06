@@ -43,10 +43,42 @@ public class admin_create_project extends volley_wrapper {
     project_location ;
 
 
+    Bundle bundle_data;
+    String bundle_data_string;
+    JSONObject bundle_jsonobject;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_create_project);
+
+
+        // state
+
+        // get user_id
+        bundle_data = getIntent().getExtras();
+
+        if(bundle_data != null){
+            bundle_data_string = bundle_data
+                    .getString("bundle_data_admin_home_to_admin_create_project");
+
+            // get json
+            bundle_jsonobject = s.string_to_json(bundle_data_string);
+
+            // set user_id
+            try{
+                user_id = bundle_jsonobject.getString("user_id");
+                Toast.makeText(this, "fetched user_id "+user_id, Toast.LENGTH_SHORT).show();
+            }
+            catch (JSONException e){
+                Log.e("json_ex", "inside getting user_id");
+            }
+        }else{
+            Toast.makeText(this, "Some error occured", Toast.LENGTH_SHORT).show();
+        }
+
+        // end of state
         init();
     }
 
@@ -105,12 +137,11 @@ public class admin_create_project extends volley_wrapper {
             // if project not created
             if (user_details.getString("status") == "-1") {
                 Log.i("TODO ", "project not created");
+                Toast.makeText(this, "Project not Created", Toast.LENGTH_SHORT).show();
             }
             else {
                 Log.i("TODO ", "project created");
-                startActivity(new Intent(
-                        admin_create_project.this,
-                        admin_home.class));
+                Toast.makeText(this, "Project Created", Toast.LENGTH_SHORT).show();
             }
 
         }

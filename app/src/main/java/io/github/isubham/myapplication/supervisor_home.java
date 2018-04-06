@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import io.github.isubham.myapplication.model.project;
 import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
 import io.github.isubham.myapplication.utility.volley_wrapper;
+import io.github.isubham.myapplication.utility.s;
 
 public class supervisor_home extends volley_wrapper {
 
@@ -117,7 +119,7 @@ public class supervisor_home extends volley_wrapper {
 
     // TODO replace it with bundle user_id
     // contracter id of supa
-    String user_id = "20";
+    String user_id;
 
     RecyclerView project_rv;
     project_adapter project_adapter;
@@ -142,8 +144,51 @@ public class supervisor_home extends volley_wrapper {
                             public void onItemClick(View view, int position) {
 
                                 // TODO handle click behaviour
-                                startActivity(new Intent(supervisor_home.this,
-                                        supervisor_project.class));
+                                         Intent supervisor_home_to_supervisor_project =
+                                        new Intent(
+                                        supervisor_home.this,
+                                        supervisor_project.class);
+
+
+                                // TODO add bundle data
+                                           // get project details
+                                String project_id = ((TextView) view.findViewById(R.id.rl_project_id))
+                                        .getText().toString();
+
+                                String project_name = ((TextView) view.findViewById(R.id.rl_project_name))
+                                        .getText().toString();
+
+                                String project_start_date = ((TextView) view.findViewById(R.id.rl_project_start_date))
+                                        .getText().toString();
+
+
+                                String project_end_date = ((TextView) view.findViewById(R.id.rl_project_end_date))
+                                        .getText().toString();
+
+
+
+                                Log.i("info from admin_home ",
+                                        "project_id:"+project_id+","+
+                                        "project_name:"+project_name+","+
+                                        "project_start_date:"+project_start_date+","+
+                                        "project_end_date:"+project_end_date+","+
+                                                "user_id:"+user_id
+                                        );
+
+                                Toast.makeText(supervisor_home.this, "project id " + project_id, Toast.LENGTH_SHORT).show();
+
+                                supervisor_home_to_supervisor_project
+                                        .putExtra("bundle_data_sup_home_to_sup_project",
+                                        user_details_string+","+
+                                        "project_id:"+project_id+","+
+                                        "project_name:"+project_name+","+
+                                        "project_start_date:"+project_start_date+","+
+                                        "project_end_date:"+project_end_date+","+
+                                                "user_id:"+user_id
+                                );
+
+                                startActivity(supervisor_home_to_supervisor_project );
+
                             }
                         }));
 
@@ -153,12 +198,58 @@ public class supervisor_home extends volley_wrapper {
 
 
 
+    TextView email, name, aadhar_id;
+    Bundle user_details;
+    String user_details_string;
+    JSONObject user_details_json;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supervisor_home);
         init();
+
+        // => state management
+                user_details = getIntent().getExtras();
+
+        if(user_details != null) {
+
+             Toast.makeText(this, " user details parsed", Toast.LENGTH_SHORT).show();
+            user_details_string = user_details.getString("bundle_data");
+
+        }else{
+            Toast.makeText(this, "null user details", Toast.LENGTH_SHORT).show();
+        }
+
+
+            name = ((TextView) findViewById(R.id.supervisor_home_supervisor_name));
+            email = ((TextView) findViewById(R.id.supervisor_home_supervisor_email));
+            aadhar_id = ((TextView) findViewById(R.id.supervisor_home_supervisor_aadhar));
+
+
+        user_details_json = s.string_to_json(user_details_string);
+
+        try {
+
+            user_id = user_details_json.getString("user_id");
+
+            name.setText(user_details_json.getString("name"));
+            email.setText(user_details_json.getString("user_email"));
+            aadhar_id.setText(user_details_json.getString("aadhar_id"));
+
+
+        }catch (JSONException e) {
+            Log.e("json ex", "inside handle bundle function");
+        }
+
+
+
+
+
+        // => end of state management
+
+
         fill_data();
     }
 

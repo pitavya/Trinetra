@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/a_pkg_package_name"
             android:textSize="20dp"
-            android:text="Project name"
+            android:text="package name"
             />
 
         <LinearLayout
@@ -59,6 +59,15 @@
             />
 
         </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/a_pkg_package_id"
+            android:layout_weight="1"
+            android:text="end date"
+            />
 
 
             <LinearLayout

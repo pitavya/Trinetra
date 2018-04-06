@@ -34,7 +34,6 @@ public class sign_in extends volley_wrapper
     public void init() {
         email =  findViewById(R.id.si_email);
         password =  findViewById(R.id.si_password);
-        si_status =  findViewById(R.id.si_status);
     }
 
 
@@ -70,6 +69,12 @@ public class sign_in extends volley_wrapper
 
         return user_data;
 
+    }
+
+
+    public void to_create_account(View V){
+        startActivity(new Intent(sign_in.this,
+                create_account.class));
     }
 
     @Override

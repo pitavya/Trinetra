@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -28,13 +29,14 @@ import io.github.isubham.myapplication.adapters.package_adapter;
 import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
 import io.github.isubham.myapplication.utility.volley_wrapper;
+import io.github.isubham.myapplication.utility.s;
 
 public class supervisor_project extends volley_wrapper {
 
 
     // TODO replace it with bundle user_id
     // supervisor id of supa
-    String user_id = "20";
+    String user_id, project_id_string;
 
 
     RecyclerView package_rv;
@@ -58,9 +60,36 @@ public class supervisor_project extends volley_wrapper {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                startActivity(new Intent(
+
+                                Intent supervisor_project_to_supervisor_package =
+                                        new Intent(
                                         supervisor_project.this,
-                                        supervisor_package.class));
+                                        supervisor_package.class);
+
+                                // => add package details
+                                 String package_id = ((TextView)view.findViewById(R.id.rl_package_id))
+                                        .getText().toString().trim();
+
+                                 String package_name = ((TextView)view.findViewById(R.id.rl_package_name))
+                                        .getText().toString().trim();
+
+                                 String package_start_date = ((TextView)view.findViewById(R.id.rl_package_start_date))
+                                        .getText().toString().trim();
+
+                                 String package_end_date = ((TextView)view.findViewById(R.id.rl_package_end_date))
+                                        .getText().toString().trim();
+
+
+                                supervisor_project_to_supervisor_package.putExtra("bundle_data_sup_project_to_sup_package",
+                                        bundle_string + ","+
+                                        "package_id:"+package_id+","+
+                                        "package_name:"+package_name+","+
+                                        "package_start_date:"+package_start_date+","+
+                                        "package_end_date:"+package_end_date
+                                );
+
+                                startActivity(supervisor_project_to_supervisor_package);
+
                             }
                         }));
 
@@ -69,12 +98,42 @@ public class supervisor_project extends volley_wrapper {
     }
 
 
+
+    Bundle bundle;
+    String bundle_string;
+    JSONObject bundle_jsonobject;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supervisor_project);
         init();
+
+        // => state
+
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+
+            // => get string and json and assign to state => user_id
+            bundle_string = bundle.getString("bundle_data_sup_home_to_sup_project");
+
+            try{
+
+                user_id = s.string_to_json(bundle_string).getString("user_id");
+                project_id_string = s.string_to_json(bundle_string).getString("project_id");
+
+            }catch (JSONException e){
+                Log.e("supervisor project", "json exception while parsing user_id");
+            }
+        }
+
+
+        // => end of state
+
         fill_data();
     }
 

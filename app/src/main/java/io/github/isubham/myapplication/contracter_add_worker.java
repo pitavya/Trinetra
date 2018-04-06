@@ -59,7 +59,7 @@ public class contracter_add_worker extends volley_wrapper {
 
 
     /* TODO : get them from real db */
-    String user_id  = "17";
+    String user_id;
 
 
     public void handle_response(String response){
@@ -149,10 +149,34 @@ public class contracter_add_worker extends volley_wrapper {
         worker_fingerprint = findViewById(R.id.c_a_w_worker_fingerprint);
     }
 
+    Bundle bundle;
+    String bundle_string;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contracter_add_worker);
+
+        // => state
+
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+            bundle_string = bundle.getString(
+                    "bundle_data_contracter_home_to_contracter_view_manpower"
+            );
+            try{
+                // => set user_id
+                user_id = (s.string_to_json(bundle_string)).getString("user_id");
+                Toast.makeText(this, "state changed", Toast.LENGTH_SHORT).show();
+            }catch (JSONException e){
+                Log.e("contracter_add_worker", "json exception");
+            }
+
+        }
+
         init();
     }
 }

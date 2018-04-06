@@ -127,8 +127,8 @@ public class admin_home extends volley_wrapper {
 
     public void to_add_new_project(View V){
 
-        Intent to_add_new_project = new Intent(admin_home.this, admin_create_package.class);
-        to_add_new_project.putExtra("bundle_data", user_details_string);
+        Intent to_add_new_project = new Intent(admin_home.this, admin_create_project.class);
+        to_add_new_project.putExtra("bundle_data_admin_home_to_admin_create_project", user_details_string);
         startActivity(to_add_new_project);
 
     }
@@ -179,9 +179,20 @@ public class admin_home extends volley_wrapper {
                                 String project_end_date = ((TextView) view.findViewById(R.id.rl_project_end_date))
                                         .getText().toString();
 
+
                                try{
 
-                                to_admin_project.putExtra("bundle_data",
+                                Log.i("info from admin_home ",
+                                        "project_id:"+project_id+","+
+                                        "project_name:"+project_name+","+
+                                        "project_start_date:"+project_start_date+","+
+                                        "project_end_date:"+project_end_date+","+
+                                                "user_id:"+user_details_json.getString("user_id")
+                                        );
+
+
+                                to_admin_project.putExtra("bundle_data_admin_home_to_admin_project",
+                                        user_details_string + ","+
                                         "project_id:"+project_id+","+
                                         "project_name:"+project_name+","+
                                         "project_start_date:"+project_start_date+","+
@@ -193,7 +204,7 @@ public class admin_home extends volley_wrapper {
                                    Log.e("json ex", "inside click in admin home");
                                }
 
-                                startActivity(new Intent(admin_home.this, admin_project.class));
+                               startActivity(to_admin_project);
                             }
                         }));
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -25,6 +26,8 @@ import io.github.isubham.myapplication.model.worker;
 import io.github.isubham.myapplication.utility.RecyclerItemClickListener;
 import io.github.isubham.myapplication.utility.data_wrapper;
 import io.github.isubham.myapplication.utility.volley_wrapper;
+import io.github.isubham.myapplication.utility.s;
+
 
 public class contracter_view_manpower extends volley_wrapper {
 
@@ -122,7 +125,7 @@ public class contracter_view_manpower extends volley_wrapper {
 
     // TODO replace it with bundle user_id
     // contracter id of cona
-    String user_id = "17";
+    String user_id;
 
 
     RecyclerView worker_rv;
@@ -161,12 +164,36 @@ public class contracter_view_manpower extends volley_wrapper {
         startActivity(new Intent(contracter_view_manpower.this, contracter_add_worker.class));
     }
 
+    Bundle bundle;
+    String bundle_string;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contracter_view_manpower);
         init();
+
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+
+            bundle_string = bundle.getString(
+                    "bundle_data_contracter_home_to_contracter_view_manpower"
+            );
+            try{
+                // => set user_id
+                user_id = (s.string_to_json(bundle_string)).getString("user_id");
+                Toast.makeText(this, "state changed", Toast.LENGTH_SHORT).show();
+            }catch (JSONException e){
+                Log.e("contracter_view_worker", "json exception");
+            }
+
+        }
+
+
+
         fill_data();
     }
 

@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/a_pkg_package_name"
+            android:id="@+id/supervisor_package_package_name"
             android:textSize="20dp"
             android:text="Package name"
             />
@@ -45,7 +45,7 @@
             <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/a_pkg_package_start_date"
+            android:id="@+id/supervisor_package_package_start_date"
                 android:layout_weight="1"
                 android:text="start date"
             />
@@ -53,13 +53,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/a_pkg_package_end_date"
+            android:id="@+id/supervisor_package_package_end_date"
             android:layout_weight="1"
             android:text="end date"
             />
 
         </LinearLayout>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/supervisor_package_package_id"
+            android:layout_weight="1"
+            android:text="end date"
+            />
 
             <LinearLayout
                 android:orientation="horizontal"

@@ -26,9 +26,9 @@ public class admin_add_contracter_package extends volley_wrapper {
     EditText new_contracter_email;
 
     // TODO get this user_id from other activities
-    String package_id = "5";
-    String project_id = "5";
-    String user_id = "14";
+    String package_id ;
+    String project_id ;
+    String user_id ;
 
     @Override
     public Map makeParams() {
@@ -71,7 +71,6 @@ public class admin_add_contracter_package extends volley_wrapper {
 
                 case data_wrapper.RETURN_USER_ADDED_IN_PACKAGE: {
                     Toast.makeText(this, "CONTRACTER ADDED", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(admin_add_contracter_package.this, admin_package.class));
                 }
             }
 
@@ -86,11 +85,54 @@ public class admin_add_contracter_package extends volley_wrapper {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    Bundle bundle;
+    String bundle_data;
+    JSONObject bundle_json_object;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_add_contracter_package);
         new_contracter_email = (EditText) findViewById(R.id.new_contracter_email);
+
+
+         bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+
+            bundle_data = bundle.getString("bundle_date_admin_package_to_admin_add_contracter_package");
+
+            Log.e("bundle_data", bundle_data);
+            // get bundle user_id and project_id
+            // => get data from bundle
+
+
+            //
+            bundle_json_object = s.string_to_json(bundle_data);
+
+            try{
+
+            // set in state variables
+            package_id = bundle_json_object.getString("package_id");
+            project_id = bundle_json_object.getString("project_id");
+            user_id = bundle_json_object.getString("user_id");
+
+                Toast.makeText(this, "states set package_id = "
+                        +package_id+" project_id = "
+                        +project_id+" user_id = "
+                        +user_id
+                        ,
+                        Toast.LENGTH_SHORT).show();
+                // =>
+
+            }catch (JSONException e){
+                Log.e("admin_add_contracter","json excpetion");
+            }
+            //
+        }else{
+            Toast.makeText(this, "no data in bundle", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     // TODO add method to add a new contracter to the package

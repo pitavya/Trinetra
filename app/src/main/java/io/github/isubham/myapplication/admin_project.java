@@ -75,12 +75,26 @@ public class admin_project extends volley_wrapper {
 
 
     public void admin_create_package(View V){
-        startActivity(new Intent(admin_project.this, admin_create_package.class));
+        Intent to_create_package = new Intent(admin_project.this,
+                admin_create_package.class);
+
+        to_create_package.putExtra("bundle_data_admin_project_to_admin_create_package",
+                bundle_data_string+",project_id:"+project_id_string
+        );
+
+        startActivity(to_create_package);
     }
 
 
     public void admin_add_admin_project(View V){
-        startActivity(new Intent(admin_project.this, admin_add_admin_project.class));
+        Intent to_add_admin_project = new Intent(admin_project.this,
+                admin_add_admin_project.class);
+
+        to_add_admin_project.putExtra("bundle_data_admin_project_to_admin_add_admin",
+                bundle_data_string+",project_id:"+project_id_string
+        );
+
+        startActivity(to_add_admin_project);
     }
 
     @Override
@@ -160,6 +174,7 @@ public class admin_project extends volley_wrapper {
                                 // get variables
                                 Intent to_admin_package = new Intent(admin_project.this,
                                         admin_package.class);
+
                                 // get package id, name, start_date, end_date
                                 String package_id = ((TextView)view.findViewById(R.id.rl_package_id))
                                         .getText().toString().trim();
@@ -174,14 +189,15 @@ public class admin_project extends volley_wrapper {
                                         .getText().toString().trim();
 
 
-                                to_admin_package.putExtra("bundle_data",
+                                to_admin_package.putExtra("bundle_data_admin_project_to_admin_package",
                                         bundle_data_string + ","+
                                         "package_id:"+package_id+","+
-                                        "package_name:"+package_start_date+","+
+                                        "package_name:"+package_name+","+
                                         "package_start_date:"+package_start_date+","+
                                         "package_end_date:"+package_end_date
                                 );
 
+                                startActivity(to_admin_package);
 
                             }
                         }));
@@ -199,7 +215,10 @@ public class admin_project extends volley_wrapper {
     Bundle bundle_data;
     String bundle_data_string;
     JSONObject bundle_data_json;
+
     TextView project_name, project_start_date, project_end_date, project_id;
+
+    String project_id_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,25 +227,28 @@ public class admin_project extends volley_wrapper {
 
         // handle state
         bundle_data = getIntent().getExtras();
-        bundle_data_json = new JSONObject();
 
-
+        //
         if(bundle_data != null) {
 
-             Toast.makeText(this, " user details parsed", Toast.LENGTH_SHORT).show();
-            bundle_data_string = bundle_data.getString("bundle_data");
-            bundle_data_json = s.string_to_json(bundle_data_string);
+            bundle_data_string = bundle_data.getString("bundle_data_admin_home_to_admin_project");
+            Log.e("bundle_data_json_project", bundle_data_string);
+            // Toast.makeText(this, "bundle not empty", Toast.LENGTH_SHORT).show();
+
 
         }else{
             Toast.makeText(this, "null user details", Toast.LENGTH_SHORT).show();
         }
+        //
 
+        bundle_data_json = s.string_to_json(bundle_data_string);
 
         project_name = (TextView) findViewById(R.id.admin_project_project_name);
         project_start_date = (TextView) findViewById(R.id.admin_project_project_start_date);
         project_end_date = (TextView) findViewById(R.id.admin_project_project_end_date);
         project_id = (TextView) findViewById(R.id.admin_project_project_id);
 
+        //
         try{
 
             project_name.setText(bundle_data_json.getString("project_name"));
@@ -234,9 +256,13 @@ public class admin_project extends volley_wrapper {
             project_end_date.setText(bundle_data_json.getString("project_end_date"));
             project_id.setText(bundle_data_json.getString("project_id"));
 
+            // setting project_id string
+            project_id_string = bundle_data_json.getString("project_id");
+
         }catch (JSONException e) {
             Log.e("json ex", "json exception in oncreate of admin project");
         }
+        //
         // end of handle state
 
 

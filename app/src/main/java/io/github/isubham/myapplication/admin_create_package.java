@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,8 +30,8 @@ public class admin_create_package extends volley_wrapper {
 
     // TODO : replace with actual email id
     // temporary admin user_id
-    String user_id = "14";
-    String project_id = "5";
+    String user_id;
+    String project_id;
 
     static int ui_flag = 0;
 
@@ -38,11 +39,41 @@ public class admin_create_package extends volley_wrapper {
     static EditText package_name, package_start_date, package_end_date,
     package_location ;
 
+    Bundle bundle;
+    String bundle_data;
+    JSONObject bundle_json_object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_create_package);
+
+        // => states
+        bundle = getIntent().getExtras();
+
+        if (bundle != null){
+            bundle_data = bundle.getString("bundle_data_admin_project_to_admin_create_package");
+
+            // get bundle user_id and project_id
+
+            try{
+                bundle_json_object = s.string_to_json(bundle_data);
+
+                project_id = bundle_json_object.getString("project_id");
+                user_id    =  bundle_json_object.getString("user_id");
+
+                Toast.makeText(this, "user_id project_id set",
+                        Toast.LENGTH_SHORT).show();
+
+
+            }catch (JSONException e){
+                Log.e("admin_create_package", "json exception");
+            }
+        }
+
+
+
+        // => end of states
         init();
     }
 
@@ -98,18 +129,15 @@ public class admin_create_package extends volley_wrapper {
 
         try {
             user_details = new JSONObject(response);
-
             // if project not created
             if (user_details.getString("status") == "-1") {
                 Log.i("TODO ", "package not created");
+                Toast.makeText(this, "package created", Toast.LENGTH_SHORT).show();
             }
             else {
                 Log.i("TODO ", "package created");
-                startActivity(new Intent(
-                        admin_create_package.this,
-                        admin_project.class));
+                Toast.makeText(this, "package created", Toast.LENGTH_SHORT).show();
             }
-
         }
         catch (JSONException e){
             Log.e("JSONException", "inside handle response");
