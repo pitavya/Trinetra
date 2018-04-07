@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,6 +68,7 @@ public class admin_home extends volley_wrapper {
             }
          */
 
+        progressDialog.hide();
 
         try{
 
@@ -151,6 +153,8 @@ public class admin_home extends volley_wrapper {
         values = new ArrayList<>();
         textViews = new ArrayList<>();
 
+        progressDialog = new ProgressDialog(admin_home.this);
+        progressDialog.setTitle("Fetching Projects");
 
         // TODO : add touch listener
         project_rv.addOnItemTouchListener(
@@ -225,6 +229,7 @@ public class admin_home extends volley_wrapper {
     Bundle user_details;
     String user_details_string;
     JSONObject user_details_json;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

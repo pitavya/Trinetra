@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_worker_name"
+            android:id="@+id/s_a_w_worker_name"
             android:text="Worker name"
             />
 
@@ -65,7 +65,7 @@
             <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_worker_type"
+            android:id="@+id/s_a_w_worker_type"
                 android:layout_weight="1"
                 android:text="Skilled Temporary"
             />
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_worker_aadhar_id"
+            android:id="@+id/s_a_w_worker_aadhar_id"
             android:layout_weight="1"
             android:text="worker aadhar"
             />
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rl_worker_id"
+                android:id="@+id/s_a_w_worker_id"
                 android:text="worker id"
                 />
  </LinearLayout>
@@ -97,22 +97,23 @@
         android:layout_marginTop="16dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_dashboard_black_24dp"
+        android:src="@drawable/fp"
         />
 
     <Button
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="scan_and_match"
-
+        android:text="scan"
+        android:onClick="scan"
         />
 
      <Button
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Authenticate"
+        android:text="Submit"
+         android:onClick="submit"
          android:backgroundTint="#efefef"
         />
 

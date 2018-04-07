@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,6 +50,8 @@ public class contracter_view_manpower extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+
+        progressDialog.hide();
 
         Log.i("handle_res ctr home", response.toString());
 
@@ -127,6 +130,7 @@ public class contracter_view_manpower extends volley_wrapper {
     // contracter id of cona
     String user_id;
 
+    ProgressDialog progressDialog;
 
     RecyclerView worker_rv;
     worker_adapter worker_adapter;
@@ -134,6 +138,7 @@ public class contracter_view_manpower extends volley_wrapper {
     private List<worker> workers;
 
     private void init() {
+        progressDialog.setTitle("Fetching worker list");
         worker_rv = (RecyclerView) findViewById(R.id.c_v_m_worker_list);
         linearLayoutManager = (new LinearLayoutManager(this));
         workers = new ArrayList<>();
@@ -202,5 +207,6 @@ public class contracter_view_manpower extends volley_wrapper {
     private void fill_data() {
         workers.clear();
         make_request();
+        progressDialog.show();
     }
 }

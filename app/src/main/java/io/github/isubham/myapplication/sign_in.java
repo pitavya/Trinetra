@@ -1,11 +1,13 @@
 package io.github.isubham.myapplication;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +32,18 @@ public class sign_in extends volley_wrapper
     // ui
     EditText email, password;
     TextView si_status;
+    ProgressDialog progressDialog;
 
     public void init() {
         email =  findViewById(R.id.si_email);
         password =  findViewById(R.id.si_password);
+
+        progressDialog = new ProgressDialog(sign_in.this);
+        progressDialog.setTitle("Signing In");
+
+
     }
+
 
 
     @Override
@@ -49,6 +58,8 @@ public class sign_in extends volley_wrapper
 
         Log.i("sign_in", makeParams().toString());
         make_request();
+
+        progressDialog.show();
 
     }
 
@@ -85,6 +96,7 @@ public class sign_in extends volley_wrapper
 
         Log.i("handle_response sign_in", response);
 
+        progressDialog.hide();
         try {
             user_details = new JSONObject(response);
 

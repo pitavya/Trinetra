@@ -1,6 +1,7 @@
 package io.github.isubham.myapplication;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -46,6 +47,8 @@ public class create_account extends volley_wrapper {
     EditText email, password, aadhar_id, name;
     String account_type;
 
+    ProgressDialog progressDialog;
+
 
     void init() {
 
@@ -53,6 +56,10 @@ public class create_account extends volley_wrapper {
         password = (EditText) findViewById(R.id.ca_password);
         aadhar_id = (EditText) findViewById(R.id.ca_aadhar_id);
         name = (EditText) findViewById(R.id.ca_name);
+
+        progressDialog = new ProgressDialog(create_account.this);
+        progressDialog.setTitle("Creating Account ");
+
 
     }
 
@@ -80,6 +87,7 @@ public class create_account extends volley_wrapper {
 
     public void create_account(View V) {
         make_request();
+        progressDialog.show();
     }
 
 
@@ -111,6 +119,7 @@ public class create_account extends volley_wrapper {
         Log.i("handle response jsonobject", response);
         JSONObject jsonObject;
 
+        progressDialog.hide();
         try {
 
             jsonObject  = new JSONObject(response);

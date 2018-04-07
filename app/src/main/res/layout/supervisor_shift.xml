@@ -12,14 +12,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Shift"
+                android:gravity="center"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="Shift No"
-                android:textColor="#0000ff" />
+                />
 
             <!--shift_type-->
             <RadioGroup
@@ -51,6 +58,11 @@
             </RadioGroup>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shift Attendence"
+                />
 
         </LinearLayout>
 
@@ -68,32 +80,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-                        <!--take authentication-->
 
-            <Button
-                android:layout_width="wrap_content"
+            <!--take authentication-->
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start Shift"
                 android:onClick="create_shift"
+                android:textSize="20dp"
+                android:gravity="center"
                 android:backgroundTint="#1aff00"
-                android:textColor="#e7ffe6"
+                android:textColor="#0000ff"
                 />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="open_shift_auth_list"
-                android:text="Authenticate"
-                />
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Stop Shift"
-                android:backgroundTint="#ff0400"
-                android:textColor="#f9bebe"
-                />
+            <!---->
 
 
         </LinearLayout>

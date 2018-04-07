@@ -40,6 +40,10 @@ public class supervisor_shift extends volley_wrapper {
     // => TODO add script to get contracter_id
 
 
+    // => TODO give worker_id string to the next servicie`
+
+
+
     create_shift_volley create_shift_volley;
     String shift_type = "1", shift_date = "11-03-2018", shift_attendence ;
     SortedSet<String> attendence_set;
@@ -171,6 +175,9 @@ public class supervisor_shift extends volley_wrapper {
     }
 
 
+
+
+
     public void get_shift_type(View V){
         switch (V.getId()){
             case R.id.shift_type_1 : shift_type = "1";break;
@@ -211,6 +218,18 @@ public class supervisor_shift extends volley_wrapper {
         }
     }
 
+    public String make_attendence_from_checkbox(){
+
+        StringBuilder sorted_attendence_string = new StringBuilder();
+        for(String i : attendence_set){
+            sorted_attendence_string.append(i + " ");
+        }
+        String final_sorted_string = sorted_attendence_string.toString();
+
+        return final_sorted_string;
+
+    }
+
     public class create_shift_volley extends volley_wrapper{
 
              @Override
@@ -222,6 +241,8 @@ public class supervisor_shift extends volley_wrapper {
                     sorted_attendence_string.append(i + " ");
                 }
                 String final_sorted_string = sorted_attendence_string.toString();
+
+                shift_attendence = final_sorted_string;
 
                 Log.e("attendence", final_sorted_string);
 
@@ -276,6 +297,19 @@ public class supervisor_shift extends volley_wrapper {
 
         create_shift_volley = new create_shift_volley();
         create_shift_volley.make_request();
+
+        Intent to_timer_service = new Intent(supervisor_shift.this,
+                TimeService.class);
+
+        to_timer_service.putExtra("bundle_data_supervisor_shift_to_supervisor_time_service_user_id",
+            user_id);
+        to_timer_service.putExtra("bundle_data_supervisor_shift_to_supervisor_timer_service_shift_attendence",
+            make_attendence_from_checkbox());
+
+        Log.e("shift_attendence", make_attendence_from_checkbox());
+
+        startService(to_timer_service);
+
 
     }
 

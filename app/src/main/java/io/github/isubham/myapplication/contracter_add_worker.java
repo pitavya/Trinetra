@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,6 +61,8 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
 
     }
 
+    ProgressDialog progressDialog;
+
     @Override
     public void make_volley_request(StringRequest stringRequest) {
         Volley.newRequestQueue(this).add(stringRequest);
@@ -79,6 +82,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
 
     public void handle_response(String response){
 
+        progressDialog.hide();
         Log.i("ctr_add_worker", response);
         JSONObject res ;
         try{
@@ -160,6 +164,8 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
     }
 
     public void init() {
+
+        progressDialog.setTitle("Creating worker");
         worker_aadhar_id=  findViewById(R.id.c_a_w_aadhar_id);
         worker_name =  findViewById(R.id.c_a_w_worker_name);
         // worker_fingerprint = findViewById(R.id.c_a_w_worker_fingerprint_image_view);
@@ -256,6 +262,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
         // Toast.makeText(this, "finger_print_iso"+ fingerData.ISOTemplate().toString(), Toast.LENGTH_SHORT).show();
         // Toast.makeText(this, "egkjbege", Toast.LENGTH_SHORT).show();
         make_request();
+        progressDialog.show();
     }
 
     @Override

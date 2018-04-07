@@ -19,10 +19,19 @@
         />
 
     <android.support.v7.widget.RecyclerView
+        android:layout_weight="0.7"
         android:id="@+id/supervisor_auth_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Shift"
+        android:textColor="#0000ff"
+        android:textSize="20dp"
+        android:gravity="center"
+        />
 
 </LinearLayout>

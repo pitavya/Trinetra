@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,6 +70,7 @@ public class contracter_home extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+        progressDialog.hide();
 
         Log.i("handle_res ctr home", response.toString());
 
@@ -147,12 +149,14 @@ public class contracter_home extends volley_wrapper {
 
 
 
+    ProgressDialog progressDialog;
     RecyclerView project_rv;
     project_adapter project_adapter;
     LinearLayoutManager linearLayoutManager;
     private List<project> projects;
 
     private void init() {
+        progressDialog.setTitle("Fetching Projects");
         project_rv = (RecyclerView) findViewById(R.id.hc_project_list);
         linearLayoutManager = (new LinearLayoutManager(this));
         projects = new ArrayList<>();

@@ -3,6 +3,7 @@ package io.github.isubham.myapplication;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class admin_create_package extends volley_wrapper {
     Bundle bundle;
     String bundle_data;
     JSONObject bundle_json_object;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class admin_create_package extends volley_wrapper {
         }
 
 
+        progressDialog.setTitle("Creating Package");
 
         // => end of states
         init();
@@ -125,6 +128,7 @@ public class admin_create_package extends volley_wrapper {
 
         JSONObject user_details;
 
+        progressDialog.hide();
         Log.i("handle_response ", "admin_create_project" +response);
 
         try {
@@ -183,5 +187,6 @@ public class admin_create_package extends volley_wrapper {
     public void create_new_package(View V) {
         // TODO : create new project
         make_request();
+        progressDialog.show();
     }
 }

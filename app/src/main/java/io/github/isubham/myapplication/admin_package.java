@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class admin_package extends AppCompatActivity {
     String bundle_data;
     JSONObject bundle_json_object;
 
+
+    ProgressDialog progressDialog;
 
     String package_name_string, package_start_date_string, package_end_date_string,
     package_id_string;
@@ -86,6 +89,10 @@ public class admin_package extends AppCompatActivity {
         package_name.setText(package_name_string);
         package_start_date.setText(package_start_date_string);
         package_end_date.setText(package_end_date_string);
+
+
+        progressDialog.setTitle("Fetching Report");
+
 
     }
 

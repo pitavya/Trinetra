@@ -48,6 +48,9 @@
         <activity android:name=".supervisor_shift" />
         <activity android:name=".supervisor_authentication" />
         <activity android:name=".supervisor_authenticate_worker"></activity>
+
+        <service android:name=".TimeService"/>
+
     </application>
 
 </manifest>

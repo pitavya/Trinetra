@@ -3,6 +3,7 @@ package io.github.isubham.myapplication;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -37,6 +38,8 @@ public class admin_create_project extends volley_wrapper {
     // temporary admin user_id
     String user_id = "14";
     static int ui_flag = 0;
+
+    ProgressDialog progressDialog;
 
     // ui components
     static EditText project_name, project_start_date, project_end_date,
@@ -86,8 +89,9 @@ public class admin_create_project extends volley_wrapper {
         project_name = (EditText) findViewById(R.id.a_c_p_project_name);
         project_start_date = (EditText) findViewById(R.id.a_c_p_project_start_date);
         project_end_date = (EditText) findViewById(R.id.a_c_p_project_end_date);
-
         project_location = (EditText) findViewById(R.id.a_c_p_project_location);
+
+        progressDialog.setTitle("Creating Project");
 
     }
 
@@ -128,6 +132,8 @@ public class admin_create_project extends volley_wrapper {
     public void handle_response(String response) {
 
         JSONObject user_details;
+
+        progressDialog.hide();
 
         Log.i("handle_response ", "admin_create_project" +response);
 
@@ -189,5 +195,6 @@ implements DatePickerDialog.OnDateSetListener
     public void create_new_project(View V) {
         // TODO : create new project
         make_request();
+        progressDialog.show();
     }
 }

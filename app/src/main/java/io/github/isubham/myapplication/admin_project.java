@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -100,6 +101,7 @@ public class admin_project extends volley_wrapper {
     @Override
     public void handle_response(String response) {
 
+        progressDialog.hide();
 
         Log.i("admin_project response", response);
 
@@ -220,6 +222,8 @@ public class admin_project extends volley_wrapper {
 
     String project_id_string;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -266,6 +270,7 @@ public class admin_project extends volley_wrapper {
         // end of handle state
 
 
+        progressDialog.setTitle("Fetching Packages");
 
         init();
 
@@ -277,6 +282,7 @@ public class admin_project extends volley_wrapper {
         // TODO : fetch data
         packages.clear();
         make_request();
+        progressDialog.show();
 
 
     }
