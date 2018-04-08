@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class contracter_package extends AppCompatActivity {
     Bundle bundle;
     String bundle_string;
     JSONObject bundle_jsonobject;
+    ProgressDialog progressDialog;
 
     // => state
 

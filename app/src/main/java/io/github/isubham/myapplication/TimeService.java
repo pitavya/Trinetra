@@ -10,12 +10,17 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import io.github.isubham.myapplication.utility.s;
 
 /**
  * Created by suraj on 7/4/18.
@@ -42,20 +47,45 @@ public class TimeService extends Service {
     Bundle bundle;
 
 
-     String user_id;
+     String bundle_string;
 
+     JSONObject bundle_jsonobject;
     String shift_attendence;
+    String user_id, project_id, package_id, shift_id;
     @Override
     public  int onStartCommand(Intent intent, int flags, int startId) {
 
-        user_id =
-                intent.getStringExtra("bundle_data_supervisor_shift_to_supervisor_time");
-        shift_attendence =
-                intent.getStringExtra("bundle_data_supervisor_shift_to_supervisor_timer_service_shift_attendence");
 
-        intanstiate();
+        if (intent == null){
+            Toast.makeText(this, "Intent is null", Toast.LENGTH_SHORT).show();
+        }else {
 
-        Log.i("shift_attendence", shift_attendence);
+            bundle_string =
+                    intent.getStringExtra("bundle_data_supervisor_shift_to_supervisor_time_service_data");
+            shift_attendence =
+                    intent.getStringExtra("bundle_data_supervisor_shift_to_supervisor_timer_service_shift_attendence");
+
+
+            // => get user, project, package_id
+            try {
+
+                bundle_jsonobject = s.string_to_json(bundle_string);
+                user_id = bundle_jsonobject.getString("user_id");
+                project_id = bundle_jsonobject.getString("project_id");
+                package_id = bundle_jsonobject.getString("package_id");
+                shift_id = bundle_jsonobject.getString("shift_id");
+
+
+            } catch (JSONException e) {
+                Log.e("json ex", "json exception in onStartCommand");
+            }
+
+
+            intanstiate();
+
+            Log.i("shift_attendence", shift_attendence);
+        }
+
         return START_STICKY;
     }
 
@@ -230,6 +260,13 @@ public class TimeService extends Service {
 
         Intent intent = new Intent(this, supervisor_authenticate_worker.class);
         intent.putExtra("worker_id", Integer.toString(wid));
+
+        intent.putExtra("user_id",    user_id);
+        intent.putExtra("project_id", project_id);
+        intent.putExtra("package_id", package_id);
+
+        intent.putExtra("shift_id", shift_id);
+
 
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
 

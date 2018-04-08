@@ -156,6 +156,7 @@ public class contracter_home extends volley_wrapper {
     private List<project> projects;
 
     private void init() {
+        progressDialog = new ProgressDialog(contracter_home.this);
         progressDialog.setTitle("Fetching Projects");
         project_rv = (RecyclerView) findViewById(R.id.hc_project_list);
         linearLayoutManager = (new LinearLayoutManager(this));
@@ -288,6 +289,7 @@ public class contracter_home extends volley_wrapper {
     private void fill_data() {
         projects.clear();
         make_request();
+        progressDialog.show();
 
     }
 }

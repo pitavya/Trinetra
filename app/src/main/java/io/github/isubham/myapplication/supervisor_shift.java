@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,12 +43,11 @@ public class supervisor_shift extends volley_wrapper {
 
     // => TODO give worker_id string to the next servicie`
 
-
-
     create_shift_volley create_shift_volley;
     String shift_type = "1", shift_date = "11-03-2018", shift_attendence ;
     SortedSet<String> attendence_set;
 
+    ProgressDialog progressDialog_fetch_worker, progressDialog_start_shift;
     Bundle bundle;
     String bundle_string;
     JSONObject bundle_jsonobject;
@@ -56,6 +56,13 @@ public class supervisor_shift extends volley_wrapper {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        progressDialog_fetch_worker = new ProgressDialog(supervisor_shift.this);
+        progressDialog_start_shift  = new ProgressDialog(supervisor_shift.this);
+        progressDialog_fetch_worker.setTitle("Fetching Workers");
+        progressDialog_start_shift.setTitle("Starting Shift");
+        progressDialog_fetch_worker.show();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supervisor_shift);
         worker_checkbox = (LinearLayout) findViewById(R.id.worker_checkbox);
@@ -83,7 +90,6 @@ public class supervisor_shift extends volley_wrapper {
             // => end of bundle management
         }
     }
-
 
     // TODO get this from supervisor_shift
 
@@ -154,6 +160,7 @@ public class supervisor_shift extends volley_wrapper {
         }
     }
 
+
     @Override
     public void make_volley_request(StringRequest stringRequest) {
         Volley.newRequestQueue(this).add(stringRequest);
@@ -173,9 +180,6 @@ public class supervisor_shift extends volley_wrapper {
         }
 
     }
-
-
-
 
 
     public void get_shift_type(View V){
@@ -207,6 +211,7 @@ public class supervisor_shift extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+        progressDialog_fetch_worker.hide();
         try{
             Log.i("handle_response ", response);
             JSONObject worker_list = new JSONObject(response);
@@ -270,6 +275,7 @@ public class supervisor_shift extends volley_wrapper {
             @Override
             public void handle_response(String response) {
                 // if attendence is fetched or not
+                progressDialog_start_shift.hide();
                 try{
                     JSONObject status_response =
                             new JSONObject(response);
@@ -295,32 +301,28 @@ public class supervisor_shift extends volley_wrapper {
 
     public void create_shift(View V){
 
+        progressDialog_start_shift.show();
         create_shift_volley = new create_shift_volley();
         create_shift_volley.make_request();
 
         Intent to_timer_service = new Intent(supervisor_shift.this,
                 TimeService.class);
 
-        to_timer_service.putExtra("bundle_data_supervisor_shift_to_supervisor_time_service_user_id",
-            user_id);
+        to_timer_service.putExtra("bundle_data_supervisor_shift_to_supervisor_time_service_data",
+            bundle_string);
+
         to_timer_service.putExtra("bundle_data_supervisor_shift_to_supervisor_timer_service_shift_attendence",
             make_attendence_from_checkbox());
 
+        /*
         Log.e("shift_attendence", make_attendence_from_checkbox());
+        Log.e("bundle_string", bundle_string);
 
+        */
         startService(to_timer_service);
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 }

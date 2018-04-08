@@ -74,6 +74,7 @@ public class admin_create_package extends volley_wrapper {
         }
 
 
+        progressDialog = new ProgressDialog(admin_create_package.this);
         progressDialog.setTitle("Creating Package");
 
         // => end of states

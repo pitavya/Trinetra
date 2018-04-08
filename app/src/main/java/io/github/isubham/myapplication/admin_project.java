@@ -270,6 +270,7 @@ public class admin_project extends volley_wrapper {
         // end of handle state
 
 
+        progressDialog = new ProgressDialog(admin_project.this);
         progressDialog.setTitle("Fetching Packages");
 
         init();

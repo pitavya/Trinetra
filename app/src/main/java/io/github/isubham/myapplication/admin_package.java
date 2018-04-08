@@ -91,7 +91,9 @@ public class admin_package extends AppCompatActivity {
         package_end_date.setText(package_end_date_string);
 
 
-        progressDialog.setTitle("Fetching Report");
+
+        progressDialog = new ProgressDialog(admin_package.this);
+        progressDialog.setTitle("Fetching Shifts");
 
 
     }

@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,6 +46,9 @@ public class supervisor_project extends volley_wrapper {
     private List<package_> packages;
 
     private void init() {
+        progressDialog = new ProgressDialog(supervisor_project.this);
+        progressDialog.setTitle("Fetching Packages");
+        progressDialog.show();
         package_rv = (RecyclerView) findViewById(R.id.s_p_package_recycleview);
         linearLayoutManager = (new LinearLayoutManager(this));
         packages = new ArrayList<>();
@@ -104,6 +108,7 @@ public class supervisor_project extends volley_wrapper {
     JSONObject bundle_data_json;
 
     TextView project_name, project_start_date, project_end_date, project_id;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -184,6 +189,7 @@ public class supervisor_project extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+        progressDialog.hide();
 
         Log.i("handle_res ctr home", response.toString());
 

@@ -164,7 +164,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
     }
 
     public void init() {
-
+        progressDialog = new ProgressDialog(contracter_add_worker.this);
         progressDialog.setTitle("Creating worker");
         worker_aadhar_id=  findViewById(R.id.c_a_w_aadhar_id);
         worker_name =  findViewById(R.id.c_a_w_worker_name);
@@ -344,14 +344,14 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
 
 
     // end of mantra methods
-    private void SetTextonuiThread(final String str) {
+    public void SetTextonuiThread(final String str) {
         lblMessage.post(new Runnable() {
             public void run() {
                 lblMessage.setText(str, TextView.BufferType.EDITABLE);
             }
         });
     }
-    private void SetLogOnUIThread(final String str) {
+    public void SetLogOnUIThread(final String str) {
         txtEventLog.post(new Runnable() {
             public void run() {
 
@@ -360,8 +360,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
             }
         });
     }
-
-    private void DisplayFinger(final Bitmap bitmap) {
+    public void DisplayFinger(final Bitmap bitmap) {
         imgFinger.post(new Runnable() {
             @Override
             public void run() {
@@ -369,7 +368,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
             }
         });
     }
-    private void InitScanner() {
+    public void InitScanner() {
         try {
             int ret = mfs100.Init();
             if (ret != 0) {
@@ -388,7 +387,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
             SetTextonuiThread("Init failed, unhandled exception");
         }
     }
-    private void UnInitScanner() {
+    public void UnInitScanner() {
         try {
             int ret = mfs100.UnInit();
             if (ret != 0) {
@@ -403,11 +402,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
         }
     }
 
-
-
-
-
-    private FingerData StartSyncCapture() {
+    public FingerData StartSyncCapture() {
 
 
 

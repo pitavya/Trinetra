@@ -117,4 +117,22 @@
          android:backgroundTint="#efefef"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/s_a_w_text_event_log"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/s_a_w_lbl_message"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/s_a_w_worker_fingerprint_image_view"
+        />
+
 </LinearLayout>

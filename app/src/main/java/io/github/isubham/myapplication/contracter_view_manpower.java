@@ -138,7 +138,8 @@ public class contracter_view_manpower extends volley_wrapper {
     private List<worker> workers;
 
     private void init() {
-        progressDialog.setTitle("Fetching worker list");
+        progressDialog = new ProgressDialog(contracter_view_manpower.this);
+        progressDialog.setTitle("Fetching workers");
         worker_rv = (RecyclerView) findViewById(R.id.c_v_m_worker_list);
         linearLayoutManager = (new LinearLayoutManager(this));
         workers = new ArrayList<>();

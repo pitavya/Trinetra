@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class supervisor_authentication extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+        progressDialog.hide();
 
         Log.i("handle_res ctr home", response.toString());
 
@@ -132,6 +134,7 @@ public class supervisor_authentication extends volley_wrapper {
     auth_adapter auth_adapter;
     LinearLayoutManager linearLayoutManager;
     private List<auth> auths;
+    ProgressDialog progressDialog;
 
     private void init() {
         auth_rv = (RecyclerView) findViewById(R.id.supervisor_auth_list);
@@ -141,6 +144,11 @@ public class supervisor_authentication extends volley_wrapper {
         auth_adapter = new auth_adapter(auths);
         auth_rv.setAdapter(auth_adapter);
         auth_rv.setLayoutManager(linearLayoutManager);
+
+
+        progressDialog = new ProgressDialog(supervisor_authentication.this);
+        progressDialog.setTitle("Fetching Authentications");
+        progressDialog.show();
 
 
         // TODO : add touch listener

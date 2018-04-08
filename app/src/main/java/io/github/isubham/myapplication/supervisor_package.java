@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -86,6 +87,9 @@ public class supervisor_package extends volley_wrapper {
     JSONObject bundle_jsonobject;
 
 
+    ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -97,8 +101,12 @@ public class supervisor_package extends volley_wrapper {
         package_start_date = (TextView) findViewById(R.id.supervisor_package_package_start_date);
         package_end_date = (TextView) findViewById(R.id.supervisor_package_package_end_date);
 
+        progressDialog = new ProgressDialog(supervisor_package.this);
+        progressDialog.setTitle("Fetching Shifts");
 
+        progressDialog.show();
         // model
+
         bundle = getIntent().getExtras();
         if (bundle != null) {
 
@@ -174,6 +182,7 @@ public class supervisor_package extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+        progressDialog.hide();
 
         Log.i("handle_res ctr home", response.toString());
 

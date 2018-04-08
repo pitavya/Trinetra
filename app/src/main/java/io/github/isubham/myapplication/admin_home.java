@@ -156,6 +156,7 @@ public class admin_home extends volley_wrapper {
         progressDialog = new ProgressDialog(admin_home.this);
         progressDialog.setTitle("Fetching Projects");
 
+
         // TODO : add touch listener
         project_rv.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(),
@@ -280,6 +281,6 @@ public class admin_home extends volley_wrapper {
     private void fill_data() {
         projects.clear();
         make_request();
-
+        progressDialog.show();
     }
 }

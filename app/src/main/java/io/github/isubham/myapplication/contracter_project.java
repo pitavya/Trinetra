@@ -154,6 +154,7 @@ public class contracter_project extends volley_wrapper {
 
     private void init() {
 
+        progressDialog = new ProgressDialog(contracter_project.this);
         progressDialog.setTitle("Fetching package");
         package_rv = (RecyclerView) findViewById(R.id.c_p_package_recycleview);
         linearLayoutManager = (new LinearLayoutManager(this));

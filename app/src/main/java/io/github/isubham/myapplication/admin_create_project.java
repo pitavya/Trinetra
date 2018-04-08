@@ -91,6 +91,7 @@ public class admin_create_project extends volley_wrapper {
         project_end_date = (EditText) findViewById(R.id.a_c_p_project_end_date);
         project_location = (EditText) findViewById(R.id.a_c_p_project_location);
 
+        progressDialog = new ProgressDialog(admin_create_project.this);
         progressDialog.setTitle("Creating Project");
 
     }

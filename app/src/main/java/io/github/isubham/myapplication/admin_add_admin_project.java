@@ -1,5 +1,6 @@
 package io.github.isubham.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class admin_add_admin_project extends volley_wrapper {
     String user_id;
 
 
+    ProgressDialog progressDialog;
     @Override
     public Map makeParams() {
         // make a map
@@ -50,6 +52,7 @@ public class admin_add_admin_project extends volley_wrapper {
 
     @Override
     public void handle_response(String response) {
+        progressDialog.hide();
         // TODO : handle response
         Log.e("handle_res add admin", response);
 
@@ -124,6 +127,8 @@ public class admin_add_admin_project extends volley_wrapper {
                      "json exception while setting project_id and user_id");
         }
 
+        progressDialog = new ProgressDialog(admin_add_admin_project.this);
+        progressDialog.setTitle("Adding Admin");
 
         // => end of states
 
@@ -133,5 +138,6 @@ public class admin_add_admin_project extends volley_wrapper {
 
     public void add_new_admin_in_project(View V){
         make_request();
+        progressDialog.show();
     }
 }
