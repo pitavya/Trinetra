@@ -47,10 +47,10 @@ public class data_wrapper {
     //
     //public static String BASE_URL_LOCAL = "http://192.168.31.20/trinetra/design.php";
     // my android
-    public static String BASE_URL_LOCAL = "http://192.168.43.122/trinetra/design.php";
+    // public static String BASE_URL_LOCAL = "http://192.168.43.122/trinetra/design.php";
 
     /* TODO : add base url */
-    public static String BASE_URL_TEST = "https://trinetra.000webhostapp.com/test/design.php";
+    public static String BASE_URL_LOCAL  = "https://trinetra.000webhostapp.com/test/design.php";
     // TODO add your deploying server
     public static String BASE_URL_DEPLOY = "https://trinetra.000webhostapp.com/test/design.php";
 
