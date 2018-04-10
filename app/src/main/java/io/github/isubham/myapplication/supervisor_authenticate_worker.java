@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import io.github.isubham.myapplication.utility.volley_wrapper;
@@ -166,7 +170,7 @@ public class supervisor_authenticate_worker extends volley_wrapper implements MF
 
         // string to byte array
         byte[] real_byte_array =
-                conver_string_to_byte(fingerprint_byteArray);
+                Base64.decode(fingerprint_byteArray, Base64.DEFAULT);
 
         Log.e("worker_fingerprint", fingerprint_byteArray);
 
@@ -180,13 +184,13 @@ public class supervisor_authenticate_worker extends volley_wrapper implements MF
         }
 
         else if(ret >= 1200){
-            Toast.makeText(this, "fingerprint not matched", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "fingerprint matched", Toast.LENGTH_SHORT).show();
             auth_flag = "1";
         }
 
         else{
-            Toast.makeText(this, "fingerprint did Not matched", Toast.LENGTH_SHORT).show();
-            auth_flag = "1";
+            Toast.makeText(this, "fingerprint did not matched", Toast.LENGTH_SHORT).show();
+            auth_flag = "0";
         }
 
 
@@ -206,10 +210,11 @@ public class supervisor_authenticate_worker extends volley_wrapper implements MF
                 auth_param.put("module", "authentication");
                 auth_param.put("query_type", "i");
 
+                String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-                auth_param.put("auth_date", "8-04-2018"/*TODO add system date*/);
+                auth_param.put("auth_date", date/*TODO add system date*/);
                 auth_param.put("auth_status", auth_flag);
-                auth_param.put("user_id", user_id);
+                auth_param.put("user_id",       user_id);
                 auth_param.put("project_id", project_id);
                 auth_param.put("package_id", package_id);
                 auth_param.put("gen_worker_id", worker_id_string);

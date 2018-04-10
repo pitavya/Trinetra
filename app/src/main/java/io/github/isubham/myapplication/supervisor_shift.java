@@ -18,7 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -252,8 +255,9 @@ public class supervisor_shift extends volley_wrapper {
                 Log.e("attendence", final_sorted_string);
 
                 Map new_shift = new HashMap<String, String>();
+                 String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-                new_shift.put("shift_date", shift_date);
+                new_shift.put("shift_date", date);
                 new_shift.put("shift_attendence", final_sorted_string);
                 // user_id of supervisor
                 new_shift.put("user_id", user_id);

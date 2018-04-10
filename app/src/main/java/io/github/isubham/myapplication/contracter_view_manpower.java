@@ -136,6 +136,8 @@ public class contracter_view_manpower extends volley_wrapper {
     worker_adapter worker_adapter;
     LinearLayoutManager linearLayoutManager;
     private List<worker> workers;
+    Bundle bundle;
+    String bundle_string;
 
     private void init() {
         progressDialog = new ProgressDialog(contracter_view_manpower.this);
@@ -170,8 +172,6 @@ public class contracter_view_manpower extends volley_wrapper {
         startActivity(new Intent(contracter_view_manpower.this, contracter_add_worker.class));
     }
 
-    Bundle bundle;
-    String bundle_string;
 
 
     @Override

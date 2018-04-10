@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +50,7 @@ public class contracter_add_worker extends volley_wrapper implements MFS100Event
         worker_data.put("worker_name", s.text(worker_name));
         worker_data.put("worker_type", worker_type);
         worker_data.put("worker_aadhar_id", s.text(worker_aadhar_id));
-        worker_data.put("worker_fingerprint", Arrays.toString(byteArr));
+        worker_data.put("worker_fingerprint", Base64.encodeToString(byteArr, Base64.DEFAULT));
 
         worker_data.put("user_id", user_id);
 

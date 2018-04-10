@@ -109,4 +109,31 @@ public class admin_package extends AppCompatActivity {
 
         startActivity(to_add_contracter);
     }
+
+    public void admin_view_package_manpower(View V){
+        Intent to_view_manpower = new Intent(admin_package.this,
+                admin_view_manpower.class);
+
+        to_view_manpower.putExtra("admin_package_to_admin_view_manpower",
+
+                bundle_data);
+
+        startActivity(to_view_manpower);
+
+    }
+
+
+    public void admin_view_package_report(View V){
+        Intent to_view_manpower = new Intent(admin_package.this,
+                admin_view_project_report.class);
+
+        to_view_manpower.putExtra("admin_package_to_admin_project_report",
+
+                bundle_data);
+
+        startActivity(to_view_manpower);
+
+    }
+
+
 }
