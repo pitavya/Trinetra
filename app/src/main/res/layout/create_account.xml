@@ -8,6 +8,14 @@
     android:padding="16dp"
     tools:context="io.github.isubham.myapplication.create_account">
 
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/mecon"
+
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,6 +110,8 @@
         android:onClick="create_account"
         android:text="Create Account"
 
+        android:backgroundTint="#0000ff"
+        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

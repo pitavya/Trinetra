@@ -71,7 +71,7 @@ public class admin_view_project_report extends volley_wrapper {
                         .getString("package_id");
 
             }catch (JSONException e){
-                Log.e("admin_view_manpower", "json exception");
+                Log.e("admin_view_contracter", "json exception");
             }
         }
 

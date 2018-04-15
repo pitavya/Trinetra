@@ -110,11 +110,11 @@ public class admin_package extends AppCompatActivity {
         startActivity(to_add_contracter);
     }
 
-    public void admin_view_package_manpower(View V){
+    public void admin_view_package_contracter(View V){
         Intent to_view_manpower = new Intent(admin_package.this,
-                admin_view_manpower.class);
+                admin_view_contracter.class);
 
-        to_view_manpower.putExtra("admin_package_to_admin_view_manpower",
+        to_view_manpower.putExtra("admin_package_to_admin_view_contracter",
 
                 bundle_data);
 

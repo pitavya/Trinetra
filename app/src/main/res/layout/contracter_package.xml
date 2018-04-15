@@ -20,6 +20,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+     <ImageView
+         android:padding="8dp"
+         android:src="@drawable/box"
+         android:layout_width="60dp"
+         android:layout_height="60dp" />
+
         <LinearLayout
             android:layout_weight="7"
             android:orientation="vertical"
@@ -28,11 +34,45 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:textColor="#0000ff"
+            android:layout_height="wrap_content"
+            android:text="Package name"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
             android:id="@+id/contracter_package_package_name"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="Package name"
             />
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="start date"
+                android:textColor="#0000ff"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="end date"
+
+            android:textColor="#0000ff"
+            />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,6 +100,15 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#0000ff"
+            android:text="package id"
+            />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/contracter_package_package_id"
@@ -76,28 +125,31 @@
 
 
 
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="contracter_assign_supervisor"
-                    android:textColor="#0008ff"
+                    android:backgroundTint="#0000ff"
+                    android:textColor="#ffffff"
                     android:text="+ Supervisor"
                     android:layout_marginEnd="24dp"
                     android:padding="8dp"
                     android:layout_margin="8dp"
                     />
 
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="contracter_assign_manpower"
-                    android:textColor="#0008ff"
                     android:text="+ Manpower"
                     android:layout_marginEnd="24dp"
                     android:padding="8dp"
                     android:layout_margin="8dp"
+                    android:backgroundTint="#0000ff"
+                    android:textColor="#ffffff"
                     />
 
+                <!--
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -108,11 +160,13 @@
                     android:padding="8dp"
                     android:layout_margin="8dp"
                     />
-
+-->
 
 
             </LinearLayout>
         </LinearLayout>
+
+
  </LinearLayout>
 
     </android.support.v7.widget.CardView>

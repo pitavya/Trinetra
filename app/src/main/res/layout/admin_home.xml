@@ -9,48 +9,95 @@
     <!--profile info-->
     <!--name-->
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:layout_height="wrap_content">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin name"
-            android:id="@+id/admin_home_admin_name"
-            android:textSize="20sp" />
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_weight="0.9"
+            >
 
-        <!--email-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Admin email"
-            android:id="@+id/admin_home_admin_email"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#0000ff"
+                android:layout_height="wrap_content"
+                android:text="Admin name"
+                />
 
-        <!--account type-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Admin Aadhar"
-            android:id="@+id/admin_home_admin_aadhar"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Admin name"
+                android:id="@+id/admin_home_admin_name"
+                android:textSize="20sp" />
+
+            <!--email-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#0000ff"
+                android:text="Admin email"
+                />
+
+            <!--email-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin email"
+                android:id="@+id/admin_home_admin_email"
+                android:textSize="16sp" />
+
+            <!--account type-->
+            <TextView
+                android:layout_marginTop="8dp"
+                android:textColor="#0000ff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Aadhar"
+                />
+
+            <!--account type-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Aadhar"
+                android:id="@+id/admin_home_admin_aadhar"
+                android:textSize="16sp" />
 
 
-        <TextView
+            <Button
 
-            android:paddingTop="10dp"
+                android:paddingTop="10dp"
 
-            android:paddingBottom="10dp"
+                android:paddingBottom="10dp"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="to_add_new_project"
-            android:text="+ New Project"
-            android:textColor="#0000ff"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="to_add_new_project"
+                android:text="+ New Project"
+                android:backgroundTint="#0000ff"
+                android:textColor="#ffffff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="8dp"
+                android:src="@drawable/admin"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

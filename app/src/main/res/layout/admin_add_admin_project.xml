@@ -7,6 +7,46 @@
     android:orientation="vertical"
     android:padding="8dp"
     tools:context="io.github.isubham.myapplication.admin_add_admin_project">
+ <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Admin to Project"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="20dp"
+        android:textColor="#0000ff"
+        />
+
+  <LinearLayout
+      android:layout_marginTop="24dp"
+      android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+     <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/admin"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textColor="#0000ff"
+            android:text="TO"
+            />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/project"
+        />
+
+
+
+
+    </LinearLayout>
 
     <!--admin email-->
     <EditText
@@ -23,5 +63,7 @@
         android:onClick="add_new_admin_in_project"
         android:text="Add Admin"
 
+        android:backgroundTint="#0000ff"
+        android:textColor="#ffffff"
         />
 </LinearLayout>

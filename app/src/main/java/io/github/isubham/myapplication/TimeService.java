@@ -280,6 +280,7 @@ public class TimeService extends Service {
                 .setContentTitle("verification notice")
                 .setPriority(Notification.PRIORITY_MAX)
                 .setContentText("call worker :" + wid)
+                .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_SOUND).setContentIntent(pIntent).build();
         //.setAutoCancel(true).build();
 

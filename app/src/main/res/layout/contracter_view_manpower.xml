@@ -7,15 +7,15 @@
     tools:context="io.github.isubham.myapplication.contracter_view_manpower">
 
     <TextView
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Manpower"
+        android:text="Manpower"
         android:textColor="#001eff"
-        android:textSize="18dp"
+        android:textSize="20dp"
+        android:background="#dedede"
         android:padding="8dp"
         />
-
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/c_v_m_worker_list"

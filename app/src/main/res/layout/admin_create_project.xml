@@ -10,6 +10,24 @@
 
     tools:context="io.github.isubham.myapplication.admin_create_project">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Project"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="20dp"
+        android:textColor="#0000ff"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/project"
+        />
+
+
     <EditText
         android:id="@+id/a_c_p_project_name"
         android:inputType="text"
@@ -92,15 +110,10 @@
         android:text="Create Project"
         android:onClick="create_new_project"
 
+        android:backgroundTint="#0000ff"
+        android:textColor="#ffffff"
         />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back To Home"
-
-
-        />
 
 </LinearLayout>

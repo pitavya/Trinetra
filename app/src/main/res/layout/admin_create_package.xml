@@ -8,6 +8,21 @@
 
 tools:context="io.github.isubham.myapplication.admin_create_package">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Package"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="20dp"
+        android:textColor="#0000ff"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/box"
+        />
 
     <EditText
         android:id="@+id/a_c_p_package_name"
@@ -90,16 +105,11 @@ tools:context="io.github.isubham.myapplication.admin_create_package">
         android:layout_height="wrap_content"
         android:text="Create Package"
         android:onClick="create_new_package"
+        android:backgroundTint="#0000ff"
+        android:textColor="#ffffff"
 
         />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back To Home"
-
-
-        />
 
 </LinearLayout>

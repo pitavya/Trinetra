@@ -21,6 +21,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+     <LinearLayout
+         android:layout_width="60dp"
+         android:orientation="vertical"
+         android:layout_height="60dp">
+
+         <ImageView
+             android:padding="8dp"
+             android:layout_width="60dp"
+             android:layout_height="60dp"
+             android:src="@drawable/box"
+             />
+
+     </LinearLayout>
+
         <LinearLayout
             android:layout_weight="7"
             android:orientation="vertical"
@@ -30,10 +44,41 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#0000ff"
+            android:text="package name"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/a_pkg_package_name"
             android:textSize="20dp"
             android:text="package name"
+            android:layout_marginBottom="8dp"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#0000ff"
+                android:text="start date"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#0000ff"
+            android:text="end date"
+            />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,55 +107,70 @@
 
 
         <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#0000ff"
+            android:layout_weight="1"
+            android:text="package id"
+            />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/a_pkg_package_id"
             android:layout_weight="1"
-            android:text="end date"
+            android:text="package id"
             />
 
 
             <LinearLayout
-                android:orientation="horizontal"
+
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
-            <TextView
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="admin_view_package_manpower"
-                android:textColor="#0008ff"
-                android:text="Manpower"
-                android:layout_marginEnd="24dp"
-                android:padding="8dp"
-                android:layout_margin="8dp"
+                android:onClick="admin_view_package_contracter"
+                android:backgroundTint="#0000ff"
+                android:text="View Contracters"
+                android:textColor="#ffffff"
+                android:layout_margin="2dp"
                 />
 
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="admin_view_package_report"
-                    android:textColor="#0008ff"
-                    android:text="Project Report"
-                    android:layout_marginEnd="24dp"
-                    android:padding="8dp"
-                    android:layout_margin="8dp"
-                    />
-
-
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="admin_add_contracter"
-                android:textColor="#0008ff"
-                android:text="+ Contracter"
-                android:layout_marginEnd="24dp"
-                android:padding="8dp"
-                android:layout_margin="8dp"
+                android:backgroundTint="#0000ff"
+                android:textColor="#ffffff"
+                android:text="+ Contracters"
+                android:layout_margin="2dp"
                 />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="admin_view_package_report"
+                    android:text="View Report"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#0000ff"
+                    android:textColor="#ffffff"
+                    />
+
 
             </LinearLayout>
         </LinearLayout>

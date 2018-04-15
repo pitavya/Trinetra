@@ -21,12 +21,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+     <ImageView
+         android:layout_width="60dp"
+         android:layout_height="60dp"
+         android:padding="8dp"
+         android:src="@drawable/box"
+         />
+
         <LinearLayout
             android:layout_weight="7"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <TextView
+            android:textColor="#0000ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Package name"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +48,32 @@
             android:text="Package name"
             />
 
-        <LinearLayout
+         <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#0000ff"
+                android:text="start date"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#0000ff"
+            android:text="end date"
+            />
+
+        </LinearLayout>
+   <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -62,6 +100,14 @@
 
 
         <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="end date"
+            android:textColor="#0000ff"
+            />
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/supervisor_package_package_id"
@@ -87,7 +133,6 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:padding="16dp"
         android:layout_height="wrap_content">
          <TextView
             android:layout_width="wrap_content"
@@ -97,11 +142,14 @@
             />
 
 
-         <TextView android:layout_weight="0.5"
+         <Button android:layout_weight="0.5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+             android:backgroundTint="#0000ff"
+             android:padding="8dp"
              android:onClick="start_supervisor_shift"
-        android:text="Start Shift" android:textColor="#0000ff"
+        android:text="Start Shift"
+             android:textColor="#ffffff"
         />
 
     </LinearLayout>

@@ -15,9 +15,13 @@
             >
 
             <TextView
+                android:textColor="#0000ff"
+                android:padding="8dp"
+                android:background="#dedede"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Create Shift"
+                android:textSize="16dp"
                 android:gravity="center"
                 />
 
@@ -83,14 +87,15 @@
 
             <!--take authentication-->
             <TextView
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start Shift"
                 android:onClick="create_shift"
                 android:textSize="20dp"
                 android:gravity="center"
-                android:backgroundTint="#1aff00"
-                android:textColor="#0000ff"
+                android:background="#0026ff"
+                android:textColor="#ffffff"
                 />
 
             <!---->

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView android:layout_width="match_parent"
+<android.support.v7.widget.CardView
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
     xmlns:android="http://schemas.android.com/apk/res/android">
  <LinearLayout
+     android:padding="8dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -12,9 +15,10 @@
      <ImageView
          android:padding="4dp"
          android:layout_weight="1"
-         android:src="@mipmap/ic_launcher"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content" />
+
+         android:src="@drawable/worker"
+         android:layout_width="60dp"
+         android:layout_height="60dp" />
 
         <LinearLayout
             android:paddingTop="4dp"
@@ -26,9 +30,43 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_worker_name"
+            android:textColor="#0000ff"
             android:text="Worker name"
             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_worker_name"
+            android:text="Worker name"
+            android:textSize="16dp"
+            />
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#0000ff"
+                android:text="Skill Type"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="#0000ff"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="worker aadhar"
+            />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +93,13 @@
 
         </LinearLayout>
 
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:textColor="#0000ff"
+                android:layout_height="wrap_content"
+                android:text="worker id"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

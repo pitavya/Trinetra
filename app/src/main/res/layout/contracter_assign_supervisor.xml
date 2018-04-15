@@ -7,6 +7,48 @@
     android:padding="8dp"
     tools:context="io.github.isubham.myapplication.contracter_assign_supervisor">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Assign Supervisor to Package"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="20dp"
+        android:textColor="#0000ff"
+        android:layout_margin="8dp"
+        />
+
+  <LinearLayout
+      android:layout_margin="8dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+     <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/supervisor"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textColor="#0000ff"
+            android:text="TO"
+            />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/box"
+        />
+
+
+
+
+    </LinearLayout>
+
     <!--admin email-->
     <EditText
         android:layout_width="match_parent"
@@ -21,6 +63,8 @@
         android:layout_height="wrap_content"
         android:onClick="add_new_supervisor_in_package"
         android:text="Add Supervisor"
+        android:backgroundTint="#0000ff"
+        android:textColor="#ffffff"
         />
 
 

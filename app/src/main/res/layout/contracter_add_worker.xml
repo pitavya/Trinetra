@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +12,22 @@
     tools:context="io.github.isubham.myapplication.contracter_add_worker">
 
     <!--aadhar_id, worker_name, worker_type, job designation-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Worker"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="20dp"
+        android:textColor="#0000ff"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/worker"
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -147,23 +166,17 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="create_new_worker"
         android:textStyle="bold"
         android:text="Create Worker"
-        android:textColor="#0000ff"
+        android:textColor="#ffffff"
+        android:backgroundTint="#0000ff"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="back_to"
-        android:textStyle="bold"
-        android:text="Cancel"
-        />
-
 </LinearLayout>
+</ScrollView>

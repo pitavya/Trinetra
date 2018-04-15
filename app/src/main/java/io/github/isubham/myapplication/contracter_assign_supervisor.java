@@ -28,9 +28,7 @@ public class contracter_assign_supervisor extends volley_wrapper {
 
     // States =>
     // TODO get this user_id from other activities
-    String project_id = "5";
-    String package_id = "5";
-    String user_id = "14";
+    String project_id, package_id, user_id;
 
 
     @Override
@@ -43,13 +41,13 @@ public class contracter_assign_supervisor extends volley_wrapper {
 
         new_admin_params.put("user_added_email", new_admin);
 
-        new_admin_params.put("user_adder_id", user_id);
+	    new_admin_params.put("user_adder_id", user_id);
         new_admin_params.put("project_id", project_id);
         new_admin_params.put("package_id", package_id);
 
         new_admin_params.put("module", data_wrapper.QMODULE_USER_PACKAGE);
         new_admin_params.put("query_type", data_wrapper.QTYPE_I);
-        new_admin_params.put("query", data_wrapper.Q_ADD_USER_PACKAGE);
+        new_admin_params.put("query", data_wrapper.Q_C_ADD_USER_PACKAGE);
 
         return new_admin_params;
     }

@@ -15,15 +15,12 @@
 
 
     <!--button-->
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_dashboard_black_24dp"
-        android:layout_marginTop="24dp"
-        android:padding="16dp"
-
-        android:layout_marginBottom="16dp"
-
+        android:layout_gravity="center"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/mecon"
 
         />
 
@@ -55,13 +52,15 @@
 
 
 
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign In"
         android:onClick="sign_in"
-        android:background="#dedede"
-        android:textColor="#0000ff"
+
+        android:backgroundTint="#0000ff"
+        android:textColor="#ffffff"
+
         android:textSize="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center"

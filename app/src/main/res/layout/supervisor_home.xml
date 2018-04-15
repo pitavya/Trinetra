@@ -9,38 +9,78 @@
     <!--profile info-->
     <!--name-->
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Supervisor name"
-            android:id="@+id/supervisor_home_supervisor_name"
-            android:textSize="20sp" />
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_weight="0.8"
+            >
 
-        <!--email-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/supervisor_home_supervisor_email"
-            android:text="Supervisor email"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#0000ff"
+                android:layout_height="wrap_content"
+                android:text="Supervisor name"
+                 />
 
-        <!--account type-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Supervisor aadhar"
-            android:id="@+id/supervisor_home_supervisor_aadhar"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supervisor name"
+                android:id="@+id/supervisor_home_supervisor_name"
+                android:textSize="20sp" />
 
+            <!--email-->
+            <TextView
+                android:layout_marginTop="8dp"
+                android:textColor="#0000ff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supervisor email"
+                 />
+
+            <!--email-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/supervisor_home_supervisor_email"
+                android:text="Supervisor email"
+                android:textSize="16sp" />
+
+            <!--account type-->
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#0000ff"
+                android:text="Supervisor aadhar"
+                 />
+
+            <!--account type-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supervisor aadhar"
+                android:id="@+id/supervisor_home_supervisor_aadhar"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="8dp"
+            android:src="@drawable/supervisor"
+            />
 
     </LinearLayout>
-
     <!--list of project-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hs_project_list"

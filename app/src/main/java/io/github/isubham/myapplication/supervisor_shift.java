@@ -40,12 +40,10 @@ public class supervisor_shift extends volley_wrapper {
     // state =>
     // TODO stats from previous activities
 
-    String shift_id, user_id  , package_id, project_id;
+    String shift_id, user_id, package_id, project_id;
     // => TODO add script to get contracter_id
 
-
-    // => TODO give worker_id string to the next servicie`
-
+    // => TODO give worker_id string to the next servicie
     create_shift_volley create_shift_volley;
     String shift_type = "1", shift_date = "11-03-2018", shift_attendence ;
     SortedSet<String> attendence_set;
@@ -207,6 +205,7 @@ public class supervisor_shift extends volley_wrapper {
         new_attendence.put("user_added_id", user_id);
         new_attendence.put("package_id", package_id);
 
+        Log.e("make_params_get_worker", user_id + package_id);
         return new_attendence;
 
 
@@ -319,10 +318,12 @@ public class supervisor_shift extends volley_wrapper {
             make_attendence_from_checkbox());
 
         /*
+
         Log.e("shift_attendence", make_attendence_from_checkbox());
         Log.e("bundle_string", bundle_string);
 
         */
+
         startService(to_timer_service);
 
 
