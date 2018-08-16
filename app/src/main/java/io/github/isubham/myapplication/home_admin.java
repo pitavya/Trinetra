@@ -103,7 +103,7 @@ public class home_admin extends AppCompatActivity {
 
                 get_project_list_param.put("module", data_wrapper.QMODULE_PROJECT);
                 get_project_list_param.put("query_type", data_wrapper.QTYPE_O);
-                get_project_list_param.put("query", data_wrapper.Q_READ_PROJECT);
+                get_project_list_param.put("query", data_wrapper.Q_READ_PROJECTS);
 
                 return get_project_list_param;
 
@@ -154,7 +154,7 @@ public class home_admin extends AppCompatActivity {
         // TODO : fetch data
         projects.clear();
 
-        String url = data_wrapper.BASE_URL_TEST;
+        String url = data_wrapper.BASE_URL_LOCAL;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

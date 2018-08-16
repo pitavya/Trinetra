@@ -49,7 +49,10 @@ public class data_wrapper {
     // my android public static String BASE_URL_LOCAL = "http://192.168.43.122/trinetra/design.php";
 
     /* TODO : add base url */
-    public static String BASE_URL_LOCAL  = "https://trinetra.000webhostapp.com/test/design.php";
+    // public static String BASE_URL_LOCAL  = "https://trinetra.000webhostapp.com/test/design.php";
+    public static String BASE_URL_LOCAL  = "http://www.meconpms.co.in:88/trinetra_backend/design.php";
+
+
     // TODO add your deploying server
     public static String BASE_URL_DEPLOY = "https://trinetra.000webhostapp.com/test/design.php";
 
@@ -118,6 +121,18 @@ public class data_wrapper {
     // user project table
     public static final String EMAIL_NOT_IN_USER = "-1001";
     public static final String USER_ALREADY_IN_PROJECT = "-1002";
+
+
+    public static final String W_1 = "-1002";
+    public static final String W_2 = "-1002";
+    public static final String W_3 = "-1002";
+    public static final String W_4 = "-1002";
+    public static final String W_5 = "-1002";
+    public static final String W_6 = "-1002";
+
+
+
+
 
 
 
